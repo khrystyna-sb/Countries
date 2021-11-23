@@ -15,6 +15,7 @@
 		02FF1CCE2747BE0C009397BF /* CountriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CCD2747BE0C009397BF /* CountriesTests.swift */; };
 		02FF1CD82747BE0C009397BF /* CountriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CD72747BE0C009397BF /* CountriesUITests.swift */; };
 		02FF1CDA2747BE0C009397BF /* CountriesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CD92747BE0C009397BF /* CountriesUITestsLaunchTests.swift */; };
+		02FF1D23274CEBC8009397BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02FF1D22274CEBC8009397BF /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		02FF1CD32747BE0C009397BF /* CountriesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountriesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FF1CD72747BE0C009397BF /* CountriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUITests.swift; sourceTree = "<group>"; };
 		02FF1CD92747BE0C009397BF /* CountriesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		02FF1D22274CEBC8009397BF /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
 				02FF1CBA2747BE0A009397BF /* ViewController.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
+				02FF1D22274CEBC8009397BF /* Main.storyboard */,
 				02FF1CC12747BE0C009397BF /* LaunchScreen.storyboard */,
 				02FF1CC42747BE0C009397BF /* Info.plist */,
 			);
@@ -228,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02FF1D23274CEBC8009397BF /* Main.storyboard in Resources */,
 				02FF1CC32747BE0C009397BF /* LaunchScreen.storyboard in Resources */,
 				02FF1CC02747BE0C009397BF /* Assets.xcassets in Resources */,
 			);
