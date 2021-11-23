@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		02FF1CB72747BE0A009397BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CB62747BE0A009397BF /* AppDelegate.swift */; };
 		02FF1CB92747BE0A009397BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CB82747BE0A009397BF /* SceneDelegate.swift */; };
-		02FF1CBB2747BE0A009397BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CBA2747BE0A009397BF /* ViewController.swift */; };
+		02FF1CBB2747BE0A009397BF /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */; };
 		02FF1CC02747BE0C009397BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02FF1CBF2747BE0C009397BF /* Assets.xcassets */; };
 		02FF1CC32747BE0C009397BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02FF1CC12747BE0C009397BF /* LaunchScreen.storyboard */; };
 		02FF1CCE2747BE0C009397BF /* CountriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CCD2747BE0C009397BF /* CountriesTests.swift */; };
 		02FF1CD82747BE0C009397BF /* CountriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CD72747BE0C009397BF /* CountriesUITests.swift */; };
 		02FF1CDA2747BE0C009397BF /* CountriesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CD92747BE0C009397BF /* CountriesUITestsLaunchTests.swift */; };
 		02FF1D23274CEBC8009397BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02FF1D22274CEBC8009397BF /* Main.storyboard */; };
+		02FF1D27274CFF7D009397BF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D26274CFF7D009397BF /* ListViewController.swift */; };
+		02FF1D29274D13A7009397BF /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D28274D13A7009397BF /* Country.swift */; };
+		02FF1D2B274D2021009397BF /* CountryGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D2A274D2021009397BF /* CountryGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +42,7 @@
 		02FF1CB32747BE0A009397BF /* Countries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FF1CB62747BE0A009397BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02FF1CB82747BE0A009397BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		02FF1CBA2747BE0A009397BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		02FF1CBF2747BE0C009397BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02FF1CC22747BE0C009397BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02FF1CC42747BE0C009397BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +52,9 @@
 		02FF1CD72747BE0C009397BF /* CountriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUITests.swift; sourceTree = "<group>"; };
 		02FF1CD92747BE0C009397BF /* CountriesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		02FF1D22274CEBC8009397BF /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		02FF1D26274CFF7D009397BF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		02FF1D28274D13A7009397BF /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		02FF1D2A274D2021009397BF /* CountryGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +107,10 @@
 			children = (
 				02FF1CB62747BE0A009397BF /* AppDelegate.swift */,
 				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
-				02FF1CBA2747BE0A009397BF /* ViewController.swift */,
+				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
+				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
+				02FF1D28274D13A7009397BF /* Country.swift */,
+				02FF1D2A274D2021009397BF /* CountryGenerator.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
 				02FF1D22274CEBC8009397BF /* Main.storyboard */,
 				02FF1CC12747BE0C009397BF /* LaunchScreen.storyboard */,
@@ -258,8 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02FF1CBB2747BE0A009397BF /* ViewController.swift in Sources */,
+				02FF1D2B274D2021009397BF /* CountryGenerator.swift in Sources */,
+				02FF1CBB2747BE0A009397BF /* DetailsViewController.swift in Sources */,
 				02FF1CB72747BE0A009397BF /* AppDelegate.swift in Sources */,
+				02FF1D27274CFF7D009397BF /* ListViewController.swift in Sources */,
+				02FF1D29274D13A7009397BF /* Country.swift in Sources */,
 				02FF1CB92747BE0A009397BF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +371,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -414,7 +426,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
