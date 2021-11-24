@@ -1,0 +1,11 @@
+query CountriesAPI {
+    countries {
+        code
+        name
+        capital
+        languages {
+            name
+                native
+                }
+        }
+}

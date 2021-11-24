@@ -19,6 +19,8 @@
 		02FF1D27274CFF7D009397BF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D26274CFF7D009397BF /* ListViewController.swift */; };
 		02FF1D29274D13A7009397BF /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D28274D13A7009397BF /* Country.swift */; };
 		02FF1D2B274D2021009397BF /* CountryGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D2A274D2021009397BF /* CountryGenerator.swift */; };
+		02FF1D34274E6F6A009397BF /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 02FF1D33274E6F6A009397BF /* Apollo */; };
+		02FF1D37274E97E1009397BF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D36274E97E1009397BF /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,7 @@
 		02FF1D26274CFF7D009397BF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		02FF1D28274D13A7009397BF /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		02FF1D2A274D2021009397BF /* CountryGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryGenerator.swift; sourceTree = "<group>"; };
+		02FF1D36274E97E1009397BF /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02FF1D34274E6F6A009397BF /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +113,7 @@
 				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
 				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
 				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
+				02FF1D36274E97E1009397BF /* API.swift */,
 				02FF1D28274D13A7009397BF /* Country.swift */,
 				02FF1D2A274D2021009397BF /* CountryGenerator.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
@@ -143,6 +148,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02FF1CDD2747BE0C009397BF /* Build configuration list for PBXNativeTarget "Countries" */;
 			buildPhases = (
+				02FF1D35274E8C02009397BF /* Generate Apollo GraphQL API */,
 				02FF1CAF2747BE0A009397BF /* Sources */,
 				02FF1CB02747BE0A009397BF /* Frameworks */,
 				02FF1CB12747BE0A009397BF /* Resources */,
@@ -152,6 +158,9 @@
 			dependencies = (
 			);
 			name = Countries;
+			packageProductDependencies = (
+				02FF1D33274E6F6A009397BF /* Apollo */,
+			);
 			productName = Countries;
 			productReference = 02FF1CB32747BE0A009397BF /* Countries.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +233,9 @@
 				Base,
 			);
 			mainGroup = 02FF1CAA2747BE0A009397BF;
+			packageReferences = (
+				02FF1D32274E6F6A009397BF /* XCRemoteSwiftPackageReference "apollo-ios" */,
+			);
 			productRefGroup = 02FF1CB42747BE0A009397BF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,6 +274,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		02FF1D35274E8C02009397BF /* Generate Apollo GraphQL API */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL API";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Go to the build root and search up the chain to find the \n# Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API.swift\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		02FF1CAF2747BE0A009397BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -273,6 +306,7 @@
 				02FF1D27274CFF7D009397BF /* ListViewController.swift in Sources */,
 				02FF1D29274D13A7009397BF /* Country.swift in Sources */,
 				02FF1CB92747BE0A009397BF /* SceneDelegate.swift in Sources */,
+				02FF1D37274E97E1009397BF /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +660,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02FF1D32274E6F6A009397BF /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02FF1D33274E6F6A009397BF /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02FF1D32274E6F6A009397BF /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 02FF1CAB2747BE0A009397BF /* Project object */;
 }

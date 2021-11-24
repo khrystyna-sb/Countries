@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Apollo",
+        "repositoryURL": "https://github.com/apollographql/apollo-ios.git",
+        "state": {
+          "branch": "main",
+          "revision": "3262cd0cbf968c34bac2a1789eff14d0ed8284cb",
+          "version": null
+        }
+      },
+      {
+        "package": "SQLite.swift",
+        "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "60a65015f6402b7c34b9a924f755ca0a73afeeaa",
+          "version": "0.13.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
