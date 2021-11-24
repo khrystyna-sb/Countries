@@ -40,9 +40,11 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController else {return}
+        let detailsVC = DetailsViewController()
+        let splitVC  = storyboard?.instantiateViewController(withIdentifier: "SplitViewController")
+        splitVC?.present(detailsVC, animated: true, completion: nil)
         
-        navigationController?.pushViewController(detailsVC, animated: true)
+//        navigationController?.pushViewController(detailsVC, animated: true)
    //     print("selected row is \(indexPath.row)")
     }
     
