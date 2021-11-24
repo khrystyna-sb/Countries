@@ -7,6 +7,6 @@
 
 import Foundation
 
-class CountryGenerator{
-    let country1 = Country(name: "Norway", capital: "Oslo", continent: Continent(name: "Europe"), emoji: "🇳🇴")
-}
+//class CountryGenerator{
+//    let country1 = Country(name: "Norway", capital: "Oslo", continent: Continent(name: "Europe"), emoji: "🇳🇴")
+//}

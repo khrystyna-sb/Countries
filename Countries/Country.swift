@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct Country: Decodable {
-//    var code: UUID
-    var name: String
-    var capital: String
-    var continent: Continent
-    var emoji: String
-}
-
-struct Continent: Decodable {
-    var name: String
-//    var countries: [Country]
-}
+//struct Country: Decodable {
+////    var code: UUID
+//    var name: String
+//    var capital: String
+//    var continent: Continent
+//    var emoji: String
+//}
+//
+//struct Continent: Decodable {
+//    var name: String
+////    var countries: [Country]
+//}

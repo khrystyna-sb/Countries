@@ -21,6 +21,7 @@
 		02FF1D2B274D2021009397BF /* CountryGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D2A274D2021009397BF /* CountryGenerator.swift */; };
 		02FF1D34274E6F6A009397BF /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 02FF1D33274E6F6A009397BF /* Apollo */; };
 		02FF1D37274E97E1009397BF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D36274E97E1009397BF /* API.swift */; };
+		02FF1D39274EECA8009397BF /* Apollo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D38274EECA8009397BF /* Apollo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		02FF1D28274D13A7009397BF /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		02FF1D2A274D2021009397BF /* CountryGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryGenerator.swift; sourceTree = "<group>"; };
 		02FF1D36274E97E1009397BF /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		02FF1D38274EECA8009397BF /* Apollo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apollo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
 				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
 				02FF1D36274E97E1009397BF /* API.swift */,
+				02FF1D38274EECA8009397BF /* Apollo.swift */,
 				02FF1D28274D13A7009397BF /* Country.swift */,
 				02FF1D2A274D2021009397BF /* CountryGenerator.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
@@ -306,6 +309,7 @@
 				02FF1D27274CFF7D009397BF /* ListViewController.swift in Sources */,
 				02FF1D29274D13A7009397BF /* Country.swift in Sources */,
 				02FF1CB92747BE0A009397BF /* SceneDelegate.swift in Sources */,
+				02FF1D39274EECA8009397BF /* Apollo.swift in Sources */,
 				02FF1D37274E97E1009397BF /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
