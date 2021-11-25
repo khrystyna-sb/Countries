@@ -14,6 +14,8 @@ public final class CountriesApiQuery: GraphQLQuery {
         code
         name
         capital
+        currency
+        phone
         languages {
           __typename
           name
@@ -65,6 +67,8 @@ public final class CountriesApiQuery: GraphQLQuery {
           GraphQLField("code", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("capital", type: .scalar(String.self)),
+          GraphQLField("currency", type: .scalar(String.self)),
+          GraphQLField("phone", type: .nonNull(.scalar(String.self))),
           GraphQLField("languages", type: .nonNull(.list(.nonNull(.object(Language.selections))))),
         ]
       }
@@ -75,8 +79,8 @@ public final class CountriesApiQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(code: GraphQLID, name: String, capital: String? = nil, languages: [Language]) {
-        self.init(unsafeResultMap: ["__typename": "Country", "code": code, "name": name, "capital": capital, "languages": languages.map { (value: Language) -> ResultMap in value.resultMap }])
+      public init(code: GraphQLID, name: String, capital: String? = nil, currency: String? = nil, phone: String, languages: [Language]) {
+        self.init(unsafeResultMap: ["__typename": "Country", "code": code, "name": name, "capital": capital, "currency": currency, "phone": phone, "languages": languages.map { (value: Language) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -112,6 +116,24 @@ public final class CountriesApiQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "capital")
+        }
+      }
+
+      public var currency: String? {
+        get {
+          return resultMap["currency"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "currency")
+        }
+      }
+
+      public var phone: String {
+        get {
+          return resultMap["phone"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "phone")
         }
       }
 

@@ -3,6 +3,8 @@ query CountriesAPI {
         code
         name
         capital
+        currency
+        phone
         languages {
             name
             native

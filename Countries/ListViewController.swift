@@ -66,8 +66,8 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") else {return}
-        
+        guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController else {return}
+        detailsVC.countryName = countries[indexPath.row].name
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     
