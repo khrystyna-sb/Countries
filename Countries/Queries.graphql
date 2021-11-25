@@ -5,10 +5,12 @@ query CountriesAPI {
         capital
         currency
         phone
+        continent{
+            name
+        }
         languages {
             name
             native
         }
     }
 }
-

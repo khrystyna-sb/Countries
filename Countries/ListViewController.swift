@@ -68,6 +68,16 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController else {return}
         detailsVC.countryName = countries[indexPath.row].name
+        guard let countryCapital = countries[indexPath.row].capital else {return}
+        detailsVC.countryCapital = countryCapital
+        detailsVC.countryContinent = countries[indexPath.row].continent.name
+        guard let countryCurrency = countries[indexPath.row].currency else {return}
+        detailsVC.countryCurrency = countryCurrency
+        guard let countryLanguages = countries[indexPath.row].languages[0].name else {return}
+        detailsVC.countryLanguages = countryLanguages
+        detailsVC.countryPhoneCode = countries[indexPath.row].phone
+     
+        
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     

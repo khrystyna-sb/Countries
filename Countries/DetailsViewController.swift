@@ -11,27 +11,38 @@ class DetailsViewController: UIViewController {
     
     var countryName = ""
     var countryCapital = ""
+    var countryContinent = ""
+    var countryCurrency = ""
+    var countryLanguages = ""
+    var countryPhoneCode = ""
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let width = view.frame.width / 2
-        let height = view.frame.width / 8
-        let x = view.bounds.width/2 - width/2
-        let y = view.bounds.height/2 - height/2
-      
+        let details = [countryName, countryCapital, countryContinent, countryCurrency, countryLanguages, countryPhoneCode]
         
-        let label = UILabel(frame: CGRect(x: x, y: y, width: width, height: height))
-        label.text = countryName
-        label.textAlignment = .center
-        label.numberOfLines = 2
+        var labels: [UILabel] = []
+        for i in 0..<details.count {
+            let label = UILabel()
+            label.text = details[i]
+            label.textAlignment = .center
+            label.numberOfLines = 2
+            labels.append(label)
+        }
         
-        view.addSubview(label)
+        
+        let stackView = UIStackView(arrangedSubviews: labels)
+        stackView.frame = view.bounds
+        stackView.backgroundColor = .systemYellow
+        stackView.axis = .vertical
+        
+        view.addSubview(stackView)
     }
     
     
-   
+    
     
     
 }
