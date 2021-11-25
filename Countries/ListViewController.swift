@@ -8,13 +8,15 @@
 import UIKit
 
 class ListViewController: UIViewController {
-
+    
     let countriesTableView = UITableView()
-    let countryGenerator = CountryGenerator()
+    var countries: [CountriesApiQuery.Data.Country] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        loadData()
     }
     
     private func setupTableView() {
@@ -26,24 +28,47 @@ class ListViewController: UIViewController {
     }
     
 }
+extension ListViewController {
+    func loadData() {
+
+        let query = CountriesApiQuery()
+        guard let client = Apollo.shared.client else {return}
+        client.fetch(query: query) { result in
+ 
+            switch result {
+            case .success(let graphQLResult):
+                if let countries = graphQLResult.data?.countries.compactMap({ $0 }) {
+                    // 4
+                    self.countries = countries
+                    self.countriesTableView.reloadData()
+                }
+                
+            case .failure(let error):
+
+                print("Error loading data \(error)")
+            }
+        }
+    }
+}
+
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = countryGenerator.country1.name
+        cell.textLabel?.text = countries[indexPath.row].name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController else {return}
+        
+        guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") else {return}
         
         navigationController?.pushViewController(detailsVC, animated: true)
-   //     print("selected row is \(indexPath.row)")
     }
     
 }
