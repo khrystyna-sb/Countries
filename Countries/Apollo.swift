@@ -12,11 +12,11 @@ class Apollo {
     
     static let shared = Apollo()
     
-    let client: ApolloClient
-
+    var client: ApolloClient?
+    
     private init() {
-        client = ApolloClient(url: URL(string: "https://countries.trevorblades.com/")!)
+        if let url = URL(string: "https://countries.trevorblades.com/") {
+            client = ApolloClient(url: url)
+        }
     }
 }
-
-

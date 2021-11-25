@@ -32,8 +32,8 @@ extension ListViewController {
     func loadData() {
 
         let query = CountriesApiQuery()
-    
-        Apollo.shared.client.fetch(query: query) { result in
+        guard let client = Apollo.shared.client else {return}
+        client.fetch(query: query) { result in
  
             switch result {
             case .success(let graphQLResult):
