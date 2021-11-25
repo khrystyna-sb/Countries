@@ -11,7 +11,6 @@ class ListViewController: UIViewController {
     
     let countriesTableView = UITableView()
     var countries: [CountriesApiQuery.Data.Country] = []
-    //    let countryGenerator = CountryGenerator()
     
     
     override func viewDidLoad() {
@@ -31,11 +30,11 @@ class ListViewController: UIViewController {
 }
 extension ListViewController {
     func loadData() {
-        // 1
+
         let query = CountriesApiQuery()
-        // 2
+    
         Apollo.shared.client.fetch(query: query) { result in
-            // 3
+ 
             switch result {
             case .success(let graphQLResult):
                 if let countries = graphQLResult.data?.countries.compactMap({ $0 }) {
@@ -45,7 +44,7 @@ extension ListViewController {
                 }
                 
             case .failure(let error):
-                // 5
+
                 print("Error loading data \(error)")
             }
         }
@@ -68,12 +67,8 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") else {return}
-        //        let detailsVC = DetailsViewController()
-        //        let splitVC  = storyboard?.instantiateViewController(withIdentifier: "SplitViewController")
-        //        splitVC?.present(detailsVC, animated: true, completion: nil)
-        //
+        
         navigationController?.pushViewController(detailsVC, animated: true)
-        //     print("selected row is \(indexPath.row)")
     }
     
 }

@@ -5,7 +5,8 @@ query CountriesAPI {
         capital
         languages {
             name
-                native
-                }
+            native
         }
+    }
 }
+
