@@ -123,7 +123,7 @@ public final class CountriesApiQuery: GraphQLQuery {
           resultMap.updateValue(newValue, forKey: "capital")
         }
       }
-
+        
       public var currency: String? {
         get {
           return resultMap["currency"] as? String
