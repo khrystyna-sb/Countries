@@ -109,13 +109,12 @@
 		02FF1CB52747BE0A009397BF /* Countries */ = {
 			isa = PBXGroup;
 			children = (
+				02FF1D3C27512B4D009397BF /* Apollo */,
 				02FF1CB62747BE0A009397BF /* AppDelegate.swift */,
 				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
 				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
 				02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */,
 				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
-				02FF1D36274E97E1009397BF /* API.swift */,
-				02FF1D38274EECA8009397BF /* Apollo.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
 				02FF1D22274CEBC8009397BF /* Main.storyboard */,
 				02FF1CC12747BE0C009397BF /* LaunchScreen.storyboard */,
@@ -139,6 +138,15 @@
 				02FF1CD92747BE0C009397BF /* CountriesUITestsLaunchTests.swift */,
 			);
 			path = CountriesUITests;
+			sourceTree = "<group>";
+		};
+		02FF1D3C27512B4D009397BF /* Apollo */ = {
+			isa = PBXGroup;
+			children = (
+				02FF1D36274E97E1009397BF /* API.swift */,
+				02FF1D38274EECA8009397BF /* Apollo.swift */,
+			);
+			path = Apollo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

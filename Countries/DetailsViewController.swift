@@ -8,7 +8,6 @@
 import UIKit
 
 
-
 class DetailsViewController: UIViewController {
     
     //    private enum LayoutConstants {
@@ -61,7 +60,5 @@ class DetailsViewController: UIViewController {
             stackView.addArrangedSubview(label)
         }
     }
-    
-    
 }
 
