@@ -7,7 +7,21 @@
 
 import UIKit
 
+
+
 class DetailsViewController: UIViewController {
+    
+    //    private enum LayoutConstants {
+    //
+    //    }
+    
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
     var countryName = ""
     var countryCapital = ""
@@ -16,7 +30,6 @@ class DetailsViewController: UIViewController {
     var countryLanguages = ""
     var countryPhoneCode = ""
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +43,22 @@ class DetailsViewController: UIViewController {
             label.textAlignment = .center
             label.numberOfLines = 2
             labels.append(label)
+            stackView.addArrangedSubview(label)
         }
         
-        
-        let stackView = UIStackView(arrangedSubviews: labels)
-        stackView.frame = view.bounds
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        
-        view.addSubview(stackView)
+        setupStackView()
     }
     
+    private func setupStackView() {
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -navigationItem.accessibilityFrame.size.height),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
     
     
     

@@ -30,11 +30,11 @@ class ListViewController: UIViewController {
 }
 extension ListViewController {
     func loadData() {
-
+        
         let query = CountriesApiQuery()
         guard let client = Apollo.shared.client else {return}
         client.fetch(query: query) { result in
- 
+            
             switch result {
             case .success(let graphQLResult):
                 if let countries = graphQLResult.data?.countries.compactMap({ $0 }) {
@@ -44,7 +44,7 @@ extension ListViewController {
                 }
                 
             case .failure(let error):
-
+                
                 print("Error loading data \(error)")
             }
         }
@@ -58,7 +58,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
         let text = countries[indexPath.row].name
         let image = countries[indexPath.row].code.lowercased()
         cell.configure(text: text, imageName: image)
@@ -79,7 +79,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let countryLanguages = countries[indexPath.row].languages[0].name else {return}
         detailsVC.countryLanguages = "Language - \(countryLanguages)"
         detailsVC.countryPhoneCode = "Phone code - \(countries[indexPath.row].phone)"
-     
+        
         
         navigationController?.pushViewController(detailsVC, animated: true)
     }
