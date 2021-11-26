@@ -33,19 +33,7 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let details = [countryName, countryCapital, countryContinent, countryCurrency, countryLanguages, countryPhoneCode]
-        
-        var labels: [UILabel] = []
-        for i in 0..<details.count {
-            let label = UILabel()
-            label.text = details[i]
-            label.textAlignment = .center
-            label.numberOfLines = 2
-            labels.append(label)
-            stackView.addArrangedSubview(label)
-        }
-        
+        createLabels()
         setupStackView()
     }
     
@@ -60,7 +48,19 @@ class DetailsViewController: UIViewController {
         ])
     }
     
-    
+    private func createLabels() {
+        let details = [countryName, countryCapital, countryContinent, countryCurrency, countryLanguages, countryPhoneCode]
+        
+        var labels: [UILabel] = []
+        for i in 0..<details.count {
+            let label = UILabel()
+            label.text = details[i]
+            label.textAlignment = .center
+            label.numberOfLines = 2
+            labels.append(label)
+            stackView.addArrangedSubview(label)
+        }
+    }
     
     
 }
