@@ -60,8 +60,12 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
         let nameText = countries[indexPath.row].name
         let capitalText = countries[indexPath.row].capital
+        let regionText = countries[indexPath.row].continent.name
         let imageName = countries[indexPath.row].code.lowercased()
-        cell.configure(nameText: nameText, capitalText: capitalText, imageName: imageName)
+        cell.configure(nameText: nameText,
+                       capitalText: capitalText,
+                       regionText: regionText,
+                       imageName: imageName)
         
         return cell
     }

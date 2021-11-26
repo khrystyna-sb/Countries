@@ -40,6 +40,12 @@ class CountryTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let regionLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        return label
+    }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -51,9 +57,10 @@ class CountryTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(nameText: String, capitalText: String?, imageName: String) {
+    public func configure(nameText: String, capitalText: String?, regionText: String, imageName: String) {
         nameLabel.text = nameText
         capitalLabel.text = capitalText
+        regionLabel.text = regionText
         flagImageView.image = UIImage(named: imageName)
     }
     
@@ -73,6 +80,7 @@ class CountryTableViewCell: UITableViewCell {
         
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(capitalLabel)
+        stackView.addArrangedSubview(regionLabel)
         // how to not copie paste the same code?
     
         stackView.frame = CGRect(x: imageSideSize, y: 0, width: stackWightSize, height: stackHeightSize)
