@@ -35,7 +35,6 @@ class DetailsViewController: UIViewController {
         
         let stackView = UIStackView(arrangedSubviews: labels)
         stackView.frame = view.bounds
-        stackView.backgroundColor = .systemYellow
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         

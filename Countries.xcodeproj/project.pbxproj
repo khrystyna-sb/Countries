@@ -20,6 +20,7 @@
 		02FF1D34274E6F6A009397BF /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 02FF1D33274E6F6A009397BF /* Apollo */; };
 		02FF1D37274E97E1009397BF /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D36274E97E1009397BF /* API.swift */; };
 		02FF1D39274EECA8009397BF /* Apollo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D38274EECA8009397BF /* Apollo.swift */; };
+		02FF1D3B2750EFE3009397BF /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		02FF1D26274CFF7D009397BF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		02FF1D36274E97E1009397BF /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		02FF1D38274EECA8009397BF /* Apollo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apollo.swift; sourceTree = "<group>"; };
+		02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				02FF1CB62747BE0A009397BF /* AppDelegate.swift */,
 				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
 				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
+				02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */,
 				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
 				02FF1D36274E97E1009397BF /* API.swift */,
 				02FF1D38274EECA8009397BF /* Apollo.swift */,
@@ -302,6 +305,7 @@
 				02FF1D27274CFF7D009397BF /* ListViewController.swift in Sources */,
 				02FF1CB92747BE0A009397BF /* SceneDelegate.swift in Sources */,
 				02FF1D39274EECA8009397BF /* Apollo.swift in Sources */,
+				02FF1D3B2750EFE3009397BF /* CountryTableViewCell.swift in Sources */,
 				02FF1D37274E97E1009397BF /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

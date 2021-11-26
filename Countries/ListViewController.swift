@@ -24,7 +24,7 @@ class ListViewController: UIViewController {
         countriesTableView.frame = view.bounds
         countriesTableView.delegate = self
         countriesTableView.dataSource = self
-        countriesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        countriesTableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
     }
     
 }
@@ -58,8 +58,11 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = countries[indexPath.row].name
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
+        let text = countries[indexPath.row].name
+        let image = countries[indexPath.row].code.lowercased()
+        cell.configure(text: text, imageName: image)
+        
         return cell
     }
     
@@ -81,4 +84,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }

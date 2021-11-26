@@ -5,8 +5,8 @@
 //  Created by Khrystyna Matasova on 24.11.2021.
 //
 
-import Foundation
 import Apollo
+import Foundation
 
 class Apollo {
     
