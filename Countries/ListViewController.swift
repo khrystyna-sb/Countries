@@ -6,6 +6,10 @@
 //
 
 import UIKit
+//
+enum TableConstants {
+    static let heightForRow: CGFloat = 100.0
+}
 
 class ListViewController: UIViewController {
     
@@ -26,13 +30,13 @@ class ListViewController: UIViewController {
         countriesTableView.dataSource = self
         countriesTableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
     }
-    
 }
+
 extension ListViewController {
     func loadData() {
         
         let query = CountriesApiQuery()
-        guard let client = Apollo.shared.client else {return}
+        guard let client = Apollo.shared.client else { return }
         client.fetch(query: query) { result in
             
             switch result {
@@ -57,9 +61,9 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
         let country = countries[indexPath.row]
-        
         cell.configure(counrty: country)
         
         return cell
@@ -79,11 +83,10 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         detailsVC.countryLanguages = "Language - \(countryLanguages)"
         detailsVC.countryPhoneCode = "Phone code - \(countries[indexPath.row].phone)"
         
-        
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return TableConstants.heightForRow
     }
 }

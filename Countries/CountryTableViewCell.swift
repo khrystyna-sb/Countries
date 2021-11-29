@@ -11,6 +11,8 @@ class CountryTableViewCell: UITableViewCell {
     
     private enum LayoutConstants {
         static let indent: CGFloat = 2.0
+        static let imageHeight: CGFloat = TableConstants.heightForRow - indent
+        static let imageWeight: CGFloat = imageHeight * 1.5
     }
     
     static let identifier = "CountryTableViewCell"
@@ -19,28 +21,30 @@ class CountryTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private let flagImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let nameLabel: UILabel = {
+    lazy private var nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         return label
     }()
     
-    private let capitalLabel: UILabel = {
+    lazy private var capitalLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         return label
     }()
     
-    private let regionLabel: UILabel = {
+    lazy private var regionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         return label
@@ -51,6 +55,11 @@ class CountryTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(flagImageView)
         contentView.addSubview(stackView)
+        
+        setupStackView()
+        stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(capitalLabel)
+        stackView.addArrangedSubview(regionLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -72,19 +81,23 @@ class CountryTableViewCell: UITableViewCell {
         flagImageView.image = nil
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+    private func setupStackView() {
         let imageSideSize = contentView.frame.size.height - LayoutConstants.indent
-        let stackWightSize = contentView.frame.width - imageSideSize
-        let stackHeightSize = contentView.frame.height
         
-        stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(capitalLabel)
-        stackView.addArrangedSubview(regionLabel)
-        // how to not copie paste the same code?
-    
-        stackView.frame = CGRect(x: imageSideSize, y: 0, width: stackWightSize, height: stackHeightSize)
-        flagImageView.frame = CGRect(x: 1, y: 1, width: imageSideSize, height: imageSideSize )
+        NSLayoutConstraint.activate([
+            
+            flagImageView.heightAnchor.constraint(equalToConstant: LayoutConstants.imageHeight),
+            flagImageView.widthAnchor.constraint(equalToConstant: LayoutConstants.imageWeight),
+            flagImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indent),
+            flagImageView.trailingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            flagImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            flagImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indent),
+            
+            
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -imageSideSize),
+            stackView.leadingAnchor.constraint(equalTo: flagImageView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
 }
