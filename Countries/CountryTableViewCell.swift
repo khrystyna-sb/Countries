@@ -12,7 +12,7 @@ class CountryTableViewCell: UITableViewCell {
     private enum LayoutConstants {
         static let indent: CGFloat = 2.0
         static let imageHeight: CGFloat = TableConstants.heightForRow - indent
-        static let imageWeight: CGFloat = imageHeight * 1.5
+        static let imageWidth: CGFloat = imageHeight * 1.5
     }
     
     static let identifier = "CountryTableViewCell"
@@ -27,7 +27,7 @@ class CountryTableViewCell: UITableViewCell {
     
     private let flagImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -87,7 +87,7 @@ class CountryTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             
             flagImageView.heightAnchor.constraint(equalToConstant: LayoutConstants.imageHeight),
-            flagImageView.widthAnchor.constraint(equalToConstant: LayoutConstants.imageWeight),
+            flagImageView.widthAnchor.constraint(equalToConstant: LayoutConstants.imageWidth),
             flagImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indent),
             flagImageView.trailingAnchor.constraint(equalTo: stackView.leadingAnchor),
             flagImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
