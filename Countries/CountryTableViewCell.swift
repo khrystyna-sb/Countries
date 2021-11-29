@@ -93,7 +93,6 @@ class CountryTableViewCell: UITableViewCell {
             flagImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             flagImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indent),
             
-            
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -imageSideSize),
             stackView.leadingAnchor.constraint(equalTo: flagImageView.trailingAnchor),

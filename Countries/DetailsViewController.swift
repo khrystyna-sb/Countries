@@ -18,17 +18,11 @@ class DetailsViewController: UIViewController {
         return stackView
     }()
     
-    var countryName = ""
-    var countryCapital = ""
-    var countryContinent = ""
-    var countryCurrency = ""
-    var countryLanguages = ""
-    var countryPhoneCode = ""
-    
+    var country: CountriesApiQuery.Data.Country?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createLabels()
+        createLabelsAndFlag()
         setupStackView()
     }
     
@@ -43,13 +37,30 @@ class DetailsViewController: UIViewController {
         ])
     }
     
-    private func createLabels() {
-        let details = [countryName, countryCapital, countryContinent, countryCurrency, countryLanguages, countryPhoneCode]
+    private func createLabelsAndFlag() {
+        guard let country = country else { return }
         
+        let flagImageView = UIImageView(image: UIImage(named: country.code.lowercased()))
+        flagImageView.contentMode = .scaleAspectFit
+        stackView.addArrangedSubview(flagImageView)
+        var details: [String] = []
+        
+   
+        details.append(country.name)
+        guard let capital = country.capital else {return}
+        details.append(capital)
+        details.append(country.continent.name)
+        guard let currency = country.currency else {return}
+        details.append(currency)
+        guard let language = country.languages[0].name else {return}
+        details.append(language)
+        details.append(country.phone)
+
         var labels: [UILabel] = []
         for i in 0..<details.count {
             let label = UILabel()
             label.text = details[i]
+            
             label.textAlignment = .center
             label.numberOfLines = 2
             labels.append(label)
@@ -57,4 +68,5 @@ class DetailsViewController: UIViewController {
         }
     }
 }
+
 
