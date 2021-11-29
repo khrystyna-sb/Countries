@@ -57,12 +57,13 @@ class CountryTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(nameText: String, capitalText: String?, regionText: String, imageName: String) {
-        nameLabel.text = nameText
-        capitalLabel.text = capitalText
-        regionLabel.text = regionText
-        flagImageView.image = UIImage(named: imageName)
+    public func configure(counrty: CountriesApiQuery.Data.Country) {
+        nameLabel.text = counrty.name
+        capitalLabel.text = counrty.capital
+        regionLabel.text = counrty.continent.name
+        flagImageView.image = UIImage(named: counrty.code.lowercased())
     }
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()

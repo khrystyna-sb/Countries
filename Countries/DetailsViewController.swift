@@ -10,10 +10,6 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
-    //    private enum LayoutConstants {
-    //
-    //    }
-    
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
