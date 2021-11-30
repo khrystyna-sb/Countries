@@ -8,7 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
 
 
@@ -24,10 +24,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let splitViewController =  UISplitViewController()
         splitViewController.viewControllers = [masterNavigationController, detailNavigationController]
-
+        
+        splitViewController.delegate = self
+        
         self.window = UIWindow(windowScene: windowScene)
         self.window!.rootViewController = splitViewController
         self.window!.makeKeyAndVisible()
+        
+        // scene bounds doesn't reload
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -54,7 +58,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+    
+}
 
-
+extension SceneDelegate: UISplitViewControllerDelegate {
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+         return true
+     }
 }
 
