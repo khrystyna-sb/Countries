@@ -19,6 +19,8 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Countries"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
         loadData()
     }
@@ -45,7 +47,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let country = countries[indexPath.row]
