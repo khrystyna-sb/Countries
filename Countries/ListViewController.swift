@@ -53,7 +53,8 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let country = countries[indexPath.row]
         guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController else {return}
         detailsVC.country = country
-        navigationController?.pushViewController(detailsVC, animated: true)
+        self.showDetailViewController(UINavigationController(rootViewController: detailsVC), sender: nil)
+//        navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
