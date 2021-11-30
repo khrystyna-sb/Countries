@@ -6,6 +6,10 @@
 //
 
 import UIKit
+//
+enum TableConstants {
+    static let heightForRow: CGFloat = 100.0
+}
 
 class ListViewController: UIViewController {
     
@@ -24,33 +28,9 @@ class ListViewController: UIViewController {
         countriesTableView.frame = view.bounds
         countriesTableView.delegate = self
         countriesTableView.dataSource = self
-        countriesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-    }
-    
-}
-extension ListViewController {
-    func loadData() {
-
-        let query = CountriesApiQuery()
-        guard let client = Apollo.shared.client else {return}
-        client.fetch(query: query) { result in
- 
-            switch result {
-            case .success(let graphQLResult):
-                if let countries = graphQLResult.data?.countries.compactMap({ $0 }) {
-                    // 4
-                    self.countries = countries
-                    self.countriesTableView.reloadData()
-                }
-                
-            case .failure(let error):
-
-                print("Error loading data \(error)")
-            }
-        }
+        countriesTableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
     }
 }
-
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,27 +38,46 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = countries[indexPath.row].name
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
+        let country = countries[indexPath.row]
+        cell.configure(counrty: country)
+        
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let country = countries[indexPath.row]
         guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController else {return}
-        detailsVC.countryName = "Country - \(countries[indexPath.row].name)"
-        guard let countryCapital = countries[indexPath.row].capital else {return}
-        detailsVC.countryCapital = "Capital - \(countryCapital)"
-        detailsVC.countryContinent = "Region - \(countries[indexPath.row].continent.name)"
-        guard let countryCurrency = countries[indexPath.row].currency else {return}
-        detailsVC.countryCurrency = "Currency - \(countryCurrency)"
-        guard let countryLanguages = countries[indexPath.row].languages[0].name else {return}
-        detailsVC.countryLanguages = "Language - \(countryLanguages)"
-        detailsVC.countryPhoneCode = "Phone code - \(countries[indexPath.row].phone)"
-     
-        
+        detailsVC.country = country
         navigationController?.pushViewController(detailsVC, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return TableConstants.heightForRow
+    }
+}
+
+
+extension ListViewController {
+    func loadData() {
+        
+        let query = CountriesApiQuery()
+        guard let client = Apollo.shared.client else { return }
+        client.fetch(query: query) { result in
+            
+            switch result {
+            case .success(let graphQLResult):
+                if let countries = graphQLResult.data?.countries.compactMap({ $0 }) {
+                    self.countries = countries
+                    self.countriesTableView.reloadData()
+                }
+                
+            case .failure(let error):
+                
+                print("Error loading data \(error)")
+            }
+        }
+    }
 }
