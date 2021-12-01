@@ -56,7 +56,7 @@ class CountryTableViewCell: UITableViewCell {
         contentView.addSubview(flagImageView)
         contentView.addSubview(stackView)
         
-        setupStackView()
+        setupLayoutConstraints()
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(capitalLabel)
         stackView.addArrangedSubview(regionLabel)
@@ -81,7 +81,7 @@ class CountryTableViewCell: UITableViewCell {
         flagImageView.image = nil
     }
     
-    private func setupStackView() {
+    private func setupLayoutConstraints() {
         let imageSideSize = contentView.frame.size.height - LayoutConstants.indent
         
         NSLayoutConstraint.activate([
@@ -89,7 +89,6 @@ class CountryTableViewCell: UITableViewCell {
             flagImageView.heightAnchor.constraint(equalToConstant: LayoutConstants.imageHeight),
             flagImageView.widthAnchor.constraint(equalToConstant: LayoutConstants.imageWidth),
             flagImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indent),
-            flagImageView.trailingAnchor.constraint(equalTo: stackView.leadingAnchor),
             flagImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             flagImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indent),
             

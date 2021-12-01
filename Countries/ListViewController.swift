@@ -11,33 +11,30 @@ enum TableConstants {
     static let heightForRow: CGFloat = 100.0
 }
 
-class ListViewController: UIViewController {
+class ListViewController: UITableViewController {
     
-    let countriesTableView = UITableView()
     var countries: [CountriesApiQuery.Data.Country] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        self.navigationItem.title = "Countries"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        registerTableView()
         loadData()
     }
     
-    private func setupTableView() {
-        view.addSubview(countriesTableView)
-        countriesTableView.frame = view.bounds
-        countriesTableView.delegate = self
-        countriesTableView.dataSource = self
-        countriesTableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
+    private func registerTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
     }
-}
-
-extension ListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return countries.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
         let country = countries[indexPath.row]
@@ -45,16 +42,17 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let country = countries[indexPath.row]
-        guard let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController else {return}
+        let detailsVC = DetailsViewController()
         detailsVC.country = country
-        navigationController?.pushViewController(detailsVC, animated: true)
+        
+        showDetailViewController(UINavigationController(rootViewController: detailsVC), sender: nil)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return TableConstants.heightForRow
     }
 }
@@ -71,7 +69,7 @@ extension ListViewController {
             case .success(let graphQLResult):
                 if let countries = graphQLResult.data?.countries.compactMap({ $0 }) {
                     self.countries = countries
-                    self.countriesTableView.reloadData()
+                    self.tableView.reloadData()
                 }
                 
             case .failure(let error):
