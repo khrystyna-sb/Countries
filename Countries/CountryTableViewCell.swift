@@ -11,7 +11,7 @@ class CountryTableViewCell: UITableViewCell {
     
     private enum LayoutConstants {
         static let indent: CGFloat = 2.0
-        static let indentBossFromCell: CGFloat = 15.0
+        static let indentMainFromCell: CGFloat = 15.0
         static let spacing: CGFloat = 20
     }
     
@@ -116,10 +116,10 @@ class CountryTableViewCell: UITableViewCell {
     private func setupLayoutConstraints() {
         
         NSLayoutConstraint.activate([
-            mainView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentBossFromCell),
-            mainView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentBossFromCell),
-            mainView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.indentBossFromCell),
-            mainView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indentBossFromCell),
+            mainView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentMainFromCell),
+            mainView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentMainFromCell),
+            mainView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.indentMainFromCell),
+            mainView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indentMainFromCell),
             
             horisontalStackView.topAnchor.constraint(equalTo: mainView.topAnchor),
             horisontalStackView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
