@@ -10,21 +10,14 @@ import UIKit
 
 class ListViewController: UITableViewController {
     
-    enum TableConstants {
+    private enum TableConstants {
         static let heightForRow: CGFloat = 179.0
         static let headetImageName = "headerList"
+        static let headerEarthImageName = "earth"
+        static let headerLabelText = "Choose a card :)"
     }
 
     var countries: [CountriesApiQuery.Data.Country] = []
-    
-    let headerView: UIImageView = {
-        var headerView = UIImageView()
-        let image = UIImage(named: TableConstants.headetImageName)
-        headerView.image = image
-        headerView.contentMode = .scaleAspectFill
-        return headerView
-        
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +30,8 @@ class ListViewController: UITableViewController {
     private func registerTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
+        tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier)
+        tableView.register(CountryTableViewHeader.self, forHeaderFooterViewReuseIdentifier: CountryTableViewHeader.identifier)
     }
     
     
@@ -68,9 +62,13 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier) as? CountryTableViewHeader else { return UITableViewHeaderFooterView() }
+        let mainImage = UIImage(named: TableConstants.headetImageName)
+        let earthImage = UIImage(named: TableConstants.headerEarthImageName)
         
-        let header = UITableViewHeaderFooterView()
-        header.addSubview(headerView)
+        header.mainImageView.image = mainImage
+        header.earthImageView.image = earthImage
+        header.label.text = TableConstants.headerLabelText
         return header
     }
     

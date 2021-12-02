@@ -87,7 +87,6 @@ class CountryTableViewCell: UITableViewCell {
         fillInTheBossView()
         fillInTheStackViews()
         setupLayoutConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -134,7 +133,6 @@ class CountryTableViewCell: UITableViewCell {
         regionLabel.text = counrty.continent.name
         flagImageView.image = UIImage(named: counrty.code.lowercased())
     }
-    
     
     override func prepareForReuse() {
         super.prepareForReuse()
