@@ -11,11 +11,13 @@ class CountryTableViewCell: UITableViewCell {
     
     private enum LayoutConstants {
         static let indent: CGFloat = 2.0
-        static let bossViewWidth: CGFloat = 388.0
-        static let bossViewHeight: CGFloat = 179.0
-        static let indentBossFromCell: CGFloat = 10.0
-        static let imageHeight: CGFloat = TableConstants.heightForRow - indent
-        static let imageWidth: CGFloat = imageHeight * 1.5
+        static let indentBossFromCell: CGFloat = 15.0
+        static let spacing: CGFloat = 20
+    }
+    
+    private enum ColorConstants {
+        static let gradientFirstColor = CGColor(red: 225, green: 228, blue: 133, alpha: 0.5)
+        static let gradientSecondColor = CGColor(red: 186, green: 123, blue: 0, alpha: 0.5)
     }
     
     static let identifier = "CountryTableViewCell"
@@ -23,7 +25,6 @@ class CountryTableViewCell: UITableViewCell {
     private let bossView: UIView = {
         let bossView = UIView()
         bossView.translatesAutoresizingMaskIntoConstraints = false
-        bossView.backgroundColor = UIColor(red: 214, green: 194, blue: 141, alpha: 0.5)
         return bossView
     }()
     
@@ -31,7 +32,7 @@ class CountryTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = 20
+        stackView.spacing = LayoutConstants.spacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -70,12 +71,20 @@ class CountryTableViewCell: UITableViewCell {
         return label
     }()
     
+    let gradient: CAGradientLayer = {
+         let gradient = CAGradientLayer()
+         gradient.colors = [
+            ColorConstants.gradientFirstColor,
+            ColorConstants.gradientSecondColor
+         ]
+         gradient.locations = [0.0, 0.5]
+         return gradient
+     }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(bossView)
-//        contentView.addSubview(flagImageView)
-//        contentView.addSubview(labelsStackView)
         fillInTheBossView()
         fillInTheStackViews()
         setupLayoutConstraints()
@@ -86,7 +95,13 @@ class CountryTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradient.frame = bossView.bounds
+    }
+    
     private func fillInTheBossView() {
+        bossView.layer.addSublayer(gradient)
         bossView.addSubview(horisontalStackView)
     }
     
@@ -100,7 +115,6 @@ class CountryTableViewCell: UITableViewCell {
     }
     
     private func setupLayoutConstraints() {
-//        let imageSideSize = contentView.frame.size.height - LayoutConstants.indent
         
         NSLayoutConstraint.activate([
             bossView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentBossFromCell),
@@ -112,17 +126,6 @@ class CountryTableViewCell: UITableViewCell {
             horisontalStackView.leadingAnchor.constraint(equalTo: bossView.leadingAnchor),
             horisontalStackView.trailingAnchor.constraint(equalTo: bossView.trailingAnchor),
             horisontalStackView.bottomAnchor.constraint(equalTo: bossView.bottomAnchor),
-            
-//            flagImageView.heightAnchor.constraint(equalToConstant: LayoutConstants.imageHeight),
-//            flagImageView.widthAnchor.constraint(equalToConstant: LayoutConstants.imageWidth),
-//            flagImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indent),
-//            flagImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            flagImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indent),
-//
-//            verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -imageSideSize),
-//            verticalStackView.leadingAnchor.constraint(equalTo: flagImageView.trailingAnchor),
-//            verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
@@ -140,8 +143,4 @@ class CountryTableViewCell: UITableViewCell {
         capitalLabel.text = nil
         flagImageView.image = nil
     }
-    
-    
-    
-    
 }

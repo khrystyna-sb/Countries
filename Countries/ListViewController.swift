@@ -6,13 +6,14 @@
 //
 
 import UIKit
-//
-enum TableConstants {
-    static let heightForRow: CGFloat = 179.0
-}
+
 
 class ListViewController: UITableViewController {
     
+    enum TableConstants {
+        static let heightForRow: CGFloat = 179.0
+    }
+
     var countries: [CountriesApiQuery.Data.Country] = []
     
     let headerView: UIImageView = {
@@ -38,9 +39,6 @@ class ListViewController: UITableViewController {
         tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
     }
     
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        1
-//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return countries.count
