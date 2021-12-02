@@ -12,13 +12,14 @@ class ListViewController: UITableViewController {
     
     enum TableConstants {
         static let heightForRow: CGFloat = 179.0
+        static let headetImageName = "headerList"
     }
 
     var countries: [CountriesApiQuery.Data.Country] = []
     
     let headerView: UIImageView = {
         var headerView = UIImageView()
-        let image = UIImage(named: "headerList")
+        let image = UIImage(named: TableConstants.headetImageName)
         headerView.image = image
         headerView.contentMode = .scaleAspectFill
         return headerView

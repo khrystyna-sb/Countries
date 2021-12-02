@@ -45,7 +45,6 @@ class CountryTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    
     private let flagImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
