@@ -22,7 +22,7 @@ class CountryTableViewCell: UITableViewCell {
     
     static let identifier = "CountryTableViewCell"
     
-    private let bossView: UIView = {
+    private let mainView: UIView = {
         let bossView = UIView()
         bossView.translatesAutoresizingMaskIntoConstraints = false
         return bossView
@@ -83,7 +83,7 @@ class CountryTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(bossView)
+        contentView.addSubview(mainView)
         fillInTheBossView()
         fillInTheStackViews()
         setupLayoutConstraints()
@@ -96,12 +96,12 @@ class CountryTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradient.frame = bossView.bounds
+        gradient.frame = mainView.bounds
     }
     
     private func fillInTheBossView() {
-        bossView.layer.addSublayer(gradient)
-        bossView.addSubview(horisontalStackView)
+        mainView.layer.addSublayer(gradient)
+        mainView.addSubview(horisontalStackView)
     }
     
     private func fillInTheStackViews() {
@@ -116,15 +116,15 @@ class CountryTableViewCell: UITableViewCell {
     private func setupLayoutConstraints() {
         
         NSLayoutConstraint.activate([
-            bossView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentBossFromCell),
-            bossView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentBossFromCell),
-            bossView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.indentBossFromCell),
-            bossView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indentBossFromCell),
+            mainView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentBossFromCell),
+            mainView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentBossFromCell),
+            mainView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.indentBossFromCell),
+            mainView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indentBossFromCell),
             
-            horisontalStackView.topAnchor.constraint(equalTo: bossView.topAnchor),
-            horisontalStackView.leadingAnchor.constraint(equalTo: bossView.leadingAnchor),
-            horisontalStackView.trailingAnchor.constraint(equalTo: bossView.trailingAnchor),
-            horisontalStackView.bottomAnchor.constraint(equalTo: bossView.bottomAnchor),
+            horisontalStackView.topAnchor.constraint(equalTo: mainView.topAnchor),
+            horisontalStackView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            horisontalStackView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            horisontalStackView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor),
         ])
     }
     

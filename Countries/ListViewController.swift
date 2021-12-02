@@ -66,14 +66,6 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return TableConstants.heightForRow
     }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let header = UITableViewHeaderFooterView()
-        header.addSubview(headerView)
-        return header
-    }
-    
 }
 
 extension ListViewController {
