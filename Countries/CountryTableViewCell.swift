@@ -16,8 +16,8 @@ class CountryTableViewCell: UITableViewCell {
     }
     
     private enum ColorConstants {
-        static let gradientFirstColor = CGColor(red: 225, green: 228, blue: 133, alpha: 0.5)
-        static let gradientSecondColor = CGColor(red: 186, green: 123, blue: 0, alpha: 0.5)
+        static let gradientFirstColor = CGColor(red: 1, green: 228/255, blue: 133/255, alpha: 0.5)
+        static let gradientSecondColor = CGColor(red: 186/255, green: 123/255, blue: 0, alpha: 0.5)
     }
     
     static let identifier = "CountryTableViewCell"
@@ -72,14 +72,14 @@ class CountryTableViewCell: UITableViewCell {
     }()
     
     let gradient: CAGradientLayer = {
-         let gradient = CAGradientLayer()
-         gradient.colors = [
+        let gradient = CAGradientLayer()
+        gradient.colors = [
             ColorConstants.gradientFirstColor,
             ColorConstants.gradientSecondColor
-         ]
-         gradient.locations = [0.0, 0.5]
-         return gradient
-     }()
+        ]
+        gradient.locations = [0.22, 1]
+        return gradient
+    }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
