@@ -9,13 +9,10 @@ import UIKit
 
 class CountryTableViewCell: UITableViewCell {
     
-    private enum LayoutConstants {
+    private enum Constants {
         static let indent: CGFloat = 2.0
         static let indentMainFromCell: CGFloat = 15.0
         static let spacing: CGFloat = 20
-    }
-    
-    private enum ColorConstants {
         static let gradientFirstColor = CGColor(red: 1, green: 228/255, blue: 133/255, alpha: 0.5)
         static let gradientSecondColor = CGColor(red: 186/255, green: 123/255, blue: 0, alpha: 0.5)
     }
@@ -32,7 +29,7 @@ class CountryTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = LayoutConstants.spacing
+        stackView.spacing = Constants.spacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -73,8 +70,8 @@ class CountryTableViewCell: UITableViewCell {
     let gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.colors = [
-            ColorConstants.gradientFirstColor,
-            ColorConstants.gradientSecondColor
+            Constants.gradientFirstColor,
+            Constants.gradientSecondColor
         ]
         gradient.locations = [0.22, 1]
         return gradient
@@ -116,10 +113,10 @@ class CountryTableViewCell: UITableViewCell {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentMainFromCell),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentMainFromCell),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.indentMainFromCell),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indentMainFromCell),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indentMainFromCell),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.indentMainFromCell),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.indentMainFromCell),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indentMainFromCell),
             
             horisontalStackView.topAnchor.constraint(equalTo: containerView.topAnchor),
             horisontalStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
