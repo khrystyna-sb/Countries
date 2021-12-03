@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-
 class CountryTableViewHeader: UITableViewHeaderFooterView {
     
-    private enum HeaderConstants {
-//        static let stackViewIndent: CGFloat = 0
+    private enum Constants {
+        static let earthImageName = "earth"
+        static let labelText = "Choose a card :)"
     }
     
     static let identifier = "CountryTableViewHeader"
@@ -28,7 +28,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
     let earthImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: Constants.earthImageName)
         return imageView
     }()
     
@@ -36,6 +36,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
         let label = UILabel()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 44, weight: .medium)
+        label.text = Constants.labelText
         return label
     }()
     

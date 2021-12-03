@@ -7,14 +7,11 @@
 
 import UIKit
 
-
 class ListViewController: UITableViewController {
     
-    private enum TableConstants {
+    private enum Constants {
         static let heightForRow: CGFloat = 179.0
         static let heightForHeader: CGFloat = 226.0
-        static let headerEarthImageName = "earth"
-        static let headerLabelText = "Choose a card :)"
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
@@ -58,19 +55,17 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableConstants.heightForRow
+        return Constants.heightForRow
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier) as? CountryTableViewHeader else { return UITableViewHeaderFooterView() }
-        let earthImage = UIImage(named: TableConstants.headerEarthImageName)
-        header.earthImageView.image = earthImage
-        header.label.text = TableConstants.headerLabelText
+
         return header
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TableConstants.heightForHeader
+        return Constants.heightForHeader
     }
 }
 
