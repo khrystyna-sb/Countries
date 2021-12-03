@@ -13,7 +13,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
     
     private enum HeaderConstants {
         static let spacing: CGFloat = 20
-        static let 
+        static let stackViewIndent: CGFloat = 40
     }
     
     static let identifier = "CountryTableViewHeader"
@@ -70,8 +70,8 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
             
             stackView.leadingAnchor.constraint(equalTo: mainImageView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: mainImageView.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: mainImageView.topAnchor, constant: <#T##CGFloat#>),
-            stackView.bottomAnchor.constraint(equalTo: mainImageView.bottomAnchor)
+            stackView.topAnchor.constraint(equalTo: mainImageView.topAnchor, constant: HeaderConstants.stackViewIndent),
+            stackView.bottomAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: -HeaderConstants.stackViewIndent)
         ])
     }
 }
