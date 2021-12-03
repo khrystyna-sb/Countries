@@ -59,11 +59,7 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier) as? CountryTableViewHeader else { return UITableViewHeaderFooterView() }
-//        let earthImage = UIImage(named: TableConstants.headerEarthImageName)
-//        header.earthImageView.image = earthImage
-//        header.label.text = TableConstants.headerLabelText
-        return header
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier) ?? UITableViewHeaderFooterView()
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

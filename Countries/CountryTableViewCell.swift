@@ -84,7 +84,6 @@ class CountryTableViewCell: UITableViewCell {
         setupContainerView()
         setupStackViews()
         setupConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
