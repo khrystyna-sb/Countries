@@ -11,13 +11,33 @@ class CountryTableViewCell: UITableViewCell {
     
     private enum LayoutConstants {
         static let indent: CGFloat = 2.0
-        static let imageHeight: CGFloat = TableConstants.heightForRow - indent
-        static let imageWidth: CGFloat = imageHeight * 1.5
+        static let indentMainFromCell: CGFloat = 15.0
+        static let spacing: CGFloat = 20
+    }
+    
+    private enum ColorConstants {
+        static let gradientFirstColor = CGColor(red: 1, green: 228/255, blue: 133/255, alpha: 0.5)
+        static let gradientSecondColor = CGColor(red: 186/255, green: 123/255, blue: 0, alpha: 0.5)
     }
     
     static let identifier = "CountryTableViewCell"
     
-    private let stackView: UIStackView = {
+    private let mainView: UIView = {
+        let bossView = UIView()
+        bossView.translatesAutoresizingMaskIntoConstraints = false
+        return bossView
+    }()
+    
+    private let horisontalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = LayoutConstants.spacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let verticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -34,36 +54,78 @@ class CountryTableViewCell: UITableViewCell {
     
     lazy private var nameLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
     lazy private var capitalLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
     lazy private var regionLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
+    }()
+    
+    let gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.colors = [
+            ColorConstants.gradientFirstColor,
+            ColorConstants.gradientSecondColor
+        ]
+        gradient.locations = [0.22, 1]
+        return gradient
     }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(flagImageView)
-        contentView.addSubview(stackView)
-        
+        contentView.addSubview(mainView)
+        fillInTheBossView()
+        fillInTheStackViews()
         setupLayoutConstraints()
-        stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(capitalLabel)
-        stackView.addArrangedSubview(regionLabel)
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradient.frame = mainView.bounds
+    }
+    
+    private func fillInTheBossView() {
+        mainView.layer.addSublayer(gradient)
+        mainView.addSubview(horisontalStackView)
+    }
+    
+    private func fillInTheStackViews() {
+        horisontalStackView.addArrangedSubview(flagImageView)
+        horisontalStackView.addArrangedSubview(verticalStackView)
+        
+        verticalStackView.addArrangedSubview(nameLabel)
+        verticalStackView.addArrangedSubview(capitalLabel)
+        verticalStackView.addArrangedSubview(regionLabel)
+    }
+    
+    private func setupLayoutConstraints() {
+        
+        NSLayoutConstraint.activate([
+            mainView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentMainFromCell),
+            mainView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentMainFromCell),
+            mainView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.indentMainFromCell),
+            mainView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indentMainFromCell),
+            
+            horisontalStackView.topAnchor.constraint(equalTo: mainView.topAnchor),
+            horisontalStackView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            horisontalStackView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            horisontalStackView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor),
+        ])
     }
     
     public func configure(counrty: CountriesApiQuery.Data.Country) {
@@ -79,23 +141,5 @@ class CountryTableViewCell: UITableViewCell {
         nameLabel.text = nil
         capitalLabel.text = nil
         flagImageView.image = nil
-    }
-    
-    private func setupLayoutConstraints() {
-        let imageSideSize = contentView.frame.size.height - LayoutConstants.indent
-        
-        NSLayoutConstraint.activate([
-            
-            flagImageView.heightAnchor.constraint(equalToConstant: LayoutConstants.imageHeight),
-            flagImageView.widthAnchor.constraint(equalToConstant: LayoutConstants.imageWidth),
-            flagImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indent),
-            flagImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            flagImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indent),
-            
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -imageSideSize),
-            stackView.leadingAnchor.constraint(equalTo: flagImageView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
     }
 }

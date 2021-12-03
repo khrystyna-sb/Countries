@@ -6,15 +6,25 @@
 //
 
 import UIKit
-//
-enum TableConstants {
-    static let heightForRow: CGFloat = 100.0
-}
+
 
 class ListViewController: UITableViewController {
     
+    enum TableConstants {
+        static let heightForRow: CGFloat = 179.0
+        static let headetImageName = "headerList"
+    }
+
     var countries: [CountriesApiQuery.Data.Country] = []
     
+    let headerView: UIImageView = {
+        var headerView = UIImageView()
+        let image = UIImage(named: TableConstants.headetImageName)
+        headerView.image = image
+        headerView.contentMode = .scaleAspectFill
+        return headerView
+        
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +39,7 @@ class ListViewController: UITableViewController {
         tableView.dataSource = self
         tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
     }
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return countries.count
@@ -56,7 +67,6 @@ class ListViewController: UITableViewController {
         return TableConstants.heightForRow
     }
 }
-
 
 extension ListViewController {
     func loadData() {

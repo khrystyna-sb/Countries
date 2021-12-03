@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "FAVPNG_map-pin_m7R2vhN3 1earth.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
