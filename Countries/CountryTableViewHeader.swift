@@ -13,6 +13,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
     private enum Constants {
         static let earthImageName = "earth"
         static let labelText = "Choose a card :)"
+        static let backgroundColor = UIColor(red: 0.945, green: 0.945, blue: 0.945, alpha: 1)
     }
     
     static let identifier = "CountryTableViewHeader"
@@ -50,6 +51,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
     }
     
     func configureContents() {
+        contentView.backgroundColor = Constants.backgroundColor
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(earthImageView)
         stackView.addArrangedSubview(label)
