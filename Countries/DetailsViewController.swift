@@ -45,7 +45,6 @@ class DetailsViewController: UIViewController {
         stackView.addArrangedSubview(flagImageView)
         var details: [String] = []
         
-        
         details.append(country.name)
         if let capital = country.capital {
             details.append(capital)
@@ -57,8 +56,7 @@ class DetailsViewController: UIViewController {
             details.append(currency)
         }
         
-        
-       var languageNames = ""
+        var languageNames = ""
         for (_, language) in country.languages.enumerated() {
             if let languageName = language.name {
                 languageNames += languageName
@@ -69,7 +67,6 @@ class DetailsViewController: UIViewController {
         if !languageNames.isEmpty {
             details.append(languageNames)
         }
-       
         
         details.append(country.phone)
         
