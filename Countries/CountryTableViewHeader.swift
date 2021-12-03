@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class CountryTableViewHeader: UITableViewHeaderFooterView {
     
     private enum HeaderConstants {

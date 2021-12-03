@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class ListViewController: UITableViewController {
     
     private enum TableConstants {
