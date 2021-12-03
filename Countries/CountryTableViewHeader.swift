@@ -14,6 +14,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
         static let earthImageName = "earth"
         static let labelText = "Choose a card :)"
         static let backgroundColor = UIColor(red: 0.945, green: 0.945, blue: 0.945, alpha: 1)
+        static let fontSize: CGFloat = 44
     }
     
     static let identifier = "CountryTableViewHeader"
@@ -36,7 +37,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
     let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 44, weight: .medium)
+        label.font = .systemFont(ofSize: Constants.fontSize, weight: .medium)
         label.text = Constants.labelText
         return label
     }()
