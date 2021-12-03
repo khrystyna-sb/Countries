@@ -59,9 +59,7 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier) as? CountryTableViewHeader else { return UITableViewHeaderFooterView() }
-
-        return header
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
