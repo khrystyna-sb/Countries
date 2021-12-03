@@ -12,18 +12,11 @@ import UIKit
 class CountryTableViewHeader: UITableViewHeaderFooterView {
     
     private enum HeaderConstants {
-        static let spacing: CGFloat = 20
-        static let stackViewIndent: CGFloat = 40
+        static let spacing: CGFloat = 0
+        static let stackViewIndent: CGFloat = 0
     }
     
     static let identifier = "CountryTableViewHeader"
-    
-    let mainImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -57,21 +50,15 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
     }
     
     func configureContents() {
-        contentView.addSubview(mainImageView)
-        mainImageView.addSubview(stackView)
+        contentView.addSubview(stackView)
         stackView.addArrangedSubview(earthImageView)
         stackView.addArrangedSubview(label)
         
         NSLayoutConstraint.activate([
-            mainImageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            mainImageView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-            mainImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-            mainImageView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
-            
-            stackView.leadingAnchor.constraint(equalTo: mainImageView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: mainImageView.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: mainImageView.topAnchor, constant: HeaderConstants.stackViewIndent),
-            stackView.bottomAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: -HeaderConstants.stackViewIndent)
+            stackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: HeaderConstants.stackViewIndent),
+            stackView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -HeaderConstants.stackViewIndent)
         ])
     }
 }
