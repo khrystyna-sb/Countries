@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class DetailsViewController: UIViewController {
     
     let stackView: UIStackView = {

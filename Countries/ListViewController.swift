@@ -7,24 +7,14 @@
 
 import UIKit
 
-
 class ListViewController: UITableViewController {
     
-    enum TableConstants {
+    private enum Constants {
         static let heightForRow: CGFloat = 179.0
-        static let headetImageName = "headerList"
+        static let heightForHeader: CGFloat = 226.0
     }
-
-    var countries: [CountriesApiQuery.Data.Country] = []
     
-    let headerView: UIImageView = {
-        var headerView = UIImageView()
-        let image = UIImage(named: TableConstants.headetImageName)
-        headerView.image = image
-        headerView.contentMode = .scaleAspectFill
-        return headerView
-        
-    }()
+    var countries: [CountriesApiQuery.Data.Country] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +27,8 @@ class ListViewController: UITableViewController {
     private func registerTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier )
+        tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier)
+        tableView.register(CountryTableViewHeader.self, forHeaderFooterViewReuseIdentifier: CountryTableViewHeader.identifier)
     }
     
     
@@ -64,7 +55,19 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableConstants.heightForRow
+        return Constants.heightForRow
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier) as? CountryTableViewHeader else { return UITableViewHeaderFooterView() }
+//        let earthImage = UIImage(named: TableConstants.headerEarthImageName)
+//        header.earthImageView.image = earthImage
+//        header.label.text = TableConstants.headerLabelText
+        return header
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Constants.heightForHeader
     }
 }
 
