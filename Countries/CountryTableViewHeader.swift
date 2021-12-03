@@ -12,8 +12,7 @@ import UIKit
 class CountryTableViewHeader: UITableViewHeaderFooterView {
     
     private enum HeaderConstants {
-        static let spacing: CGFloat = 0
-        static let stackViewIndent: CGFloat = 0
+//        static let stackViewIndent: CGFloat = 0
     }
     
     static let identifier = "CountryTableViewHeader"
@@ -22,7 +21,6 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = HeaderConstants.spacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -37,6 +35,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
     let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = .systemFont(ofSize: 44, weight: .medium)
         return label
     }()
     
@@ -57,8 +56,8 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: HeaderConstants.stackViewIndent),
-            stackView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -HeaderConstants.stackViewIndent)
+            stackView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
         ])
     }
 }
