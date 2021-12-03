@@ -22,7 +22,6 @@ class CountryTableViewCell: UITableViewCell {
     
     static let identifier = "CountryTableViewCell"
     
-
     private let mainView: UIView = {
         let mainView = UIView()
         mainView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +79,6 @@ class CountryTableViewCell: UITableViewCell {
         gradient.locations = [0.22, 1]
         return gradient
     }()
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
