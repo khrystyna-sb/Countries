@@ -20,8 +20,8 @@ class DetailsViewController: UIViewController {
         static let trailingAnchorConstant: CGFloat = 112.0
         static let bottomAnchorConstant: CGFloat = 58.0
         static let cornerRadius: CGFloat = 5
-        static let redBallImageName = "ellipse1"
-        static let greenBallImageName = "ellipse2"
+        static let redBallImage = UIImage(named: "ellipse1")
+        static let greenBallImage = UIImage(named: "ellipse2")
         static let vectorImageName = "vector"
     }
     
@@ -215,11 +215,9 @@ class DetailsViewController: UIViewController {
             imageView.contentMode = .scaleAspectFit
             
             if i % 2 == 0 {
-                let image = UIImage(named: Constants.redBallImageName)
-                imageView.image = image
+                imageView.image = Constants.redBallImage
             } else {
-                let image = UIImage(named: Constants.greenBallImageName)
-                imageView.image = image
+                imageView.image = Constants.greenBallImage
             }
             
             let vectorImage = UIImageView()
