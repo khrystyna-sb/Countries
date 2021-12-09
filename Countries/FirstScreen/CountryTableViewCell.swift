@@ -11,13 +11,23 @@ class CountryTableViewCell: UITableViewCell {
     
     private enum Constants {
         static let indent: CGFloat = 2.0
-        static let indentMainFromCell: CGFloat = 15.0
+        static let indentContentsFromContainer: CGFloat = 15.0
+        static let indentBetweenCells: CGFloat = 9.0
         static let spacing: CGFloat = 20
         static let gradientFirstColor = CGColor(red: 1, green: 228/255, blue: 133/255, alpha: 0.5)
         static let gradientSecondColor = CGColor(red: 186/255, green: 123/255, blue: 0, alpha: 0.5)
+        static let cornerRadius: CGFloat = 15
+        static let fontSize: CGFloat = 14
+        static let notAvailable = "NA"
     }
     
     static let identifier = "CountryTableViewCell"
+    
+    override var frame: CGRect {
+        didSet {
+            gradient.frame = containerView.bounds
+        }
+    }
     
     private let containerView: UIView = {
         let view = UIView()
@@ -52,18 +62,27 @@ class CountryTableViewCell: UITableViewCell {
     lazy private var nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: Constants.fontSize)
         return label
     }()
     
     lazy private var capitalLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: Constants.fontSize)
         return label
     }()
     
     lazy private var regionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: Constants.fontSize)
         return label
     }()
     
@@ -74,12 +93,12 @@ class CountryTableViewCell: UITableViewCell {
             Constants.gradientSecondColor
         ]
         gradient.locations = [0.22, 1]
+        gradient.cornerRadius = Constants.cornerRadius
         return gradient
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         contentView.addSubview(containerView)
         setupContainerView()
         setupStackViews()
@@ -89,12 +108,7 @@ class CountryTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradient.frame = containerView.bounds
-    }
-    
+
     private func setupContainerView() {
         containerView.layer.addSublayer(gradient)
         containerView.addSubview(horisontalStackView)
@@ -112,22 +126,22 @@ class CountryTableViewCell: UITableViewCell {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indentMainFromCell),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.indentMainFromCell),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.indentMainFromCell),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indentMainFromCell),
-            
-            horisontalStackView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            horisontalStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            horisontalStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            horisontalStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indentBetweenCells),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.indentContentsFromContainer),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.indentContentsFromContainer),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indentBetweenCells),
+
+            horisontalStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0),
+            horisontalStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.indentContentsFromContainer),
+            horisontalStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.indentContentsFromContainer),
+            horisontalStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0),
         ])
     }
     
     public func configure(counrty: CountriesApiQuery.Data.Country) {
-        nameLabel.text = counrty.name
-        capitalLabel.text = counrty.capital
-        regionLabel.text = counrty.continent.name
+        nameLabel.text = "country\n" + counrty.name.uppercased()
+        capitalLabel.text = "capital\n" + (counrty.capital?.uppercased() ?? Constants.notAvailable)
+        regionLabel.text = "region\n" + counrty.continent.name.uppercased()
         flagImageView.image = UIImage(named: counrty.code.lowercased())
     }
     

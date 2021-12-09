@@ -11,17 +11,21 @@ class ListViewController: UITableViewController {
     
     private enum Constants {
         static let heightForRow: CGFloat = 179.0
-        static let heightForHeader: CGFloat = 226.0
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Countries"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+
+        setupNavigationItem()
         registerTableView()
         loadData()
+    }
+    
+    func setupNavigationItem() {
+        self.navigationItem.title = "Country list"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func registerTableView() {
@@ -29,6 +33,7 @@ class ListViewController: UITableViewController {
         tableView.dataSource = self
         tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier)
         tableView.register(CountryTableViewHeader.self, forHeaderFooterViewReuseIdentifier: CountryTableViewHeader.identifier)
+        tableView.separatorStyle = .none
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,11 +63,13 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier)
+        
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: CountryTableViewHeader.identifier) as? CountryTableViewHeader else { return nil }
+        return header
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Constants.heightForHeader
+        return (UIDevice.current.userInterfaceIdiom == .phone) ? PublicConstants.heightForHeader : 0
     }
 }
 

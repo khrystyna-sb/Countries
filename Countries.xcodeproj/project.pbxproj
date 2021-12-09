@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02B0919827551D1300E9CF1A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B0919727551D1300E9CF1A /* API.swift */; };
 		02B0919E27590C7D00E9CF1A /* CountryTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B0919D27590C7D00E9CF1A /* CountryTableViewHeader.swift */; };
+		02B091AF27620B8800E9CF1A /* PublicConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B091AE27620B8800E9CF1A /* PublicConstants.swift */; };
 		02FF1CB72747BE0A009397BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CB62747BE0A009397BF /* AppDelegate.swift */; };
 		02FF1CB92747BE0A009397BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CB82747BE0A009397BF /* SceneDelegate.swift */; };
 		02FF1CBB2747BE0A009397BF /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		02B0919727551D1300E9CF1A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		02B0919D27590C7D00E9CF1A /* CountryTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewHeader.swift; sourceTree = "<group>"; };
+		02B091AE27620B8800E9CF1A /* PublicConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicConstants.swift; sourceTree = "<group>"; };
 		02FF1CB32747BE0A009397BF /* Countries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FF1CB62747BE0A009397BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02FF1CB82747BE0A009397BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02B091B027620EA200E9CF1A /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
+				02FF1CB62747BE0A009397BF /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		02B091B127620EC100E9CF1A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				02B0919727551D1300E9CF1A /* API.swift */,
+				02FF1D38274EECA8009397BF /* Apollo.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		02B091B227620ED800E9CF1A /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				02B0919D27590C7D00E9CF1A /* CountryTableViewHeader.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		02B091B32762100200E9CF1A /* FirstScreen */ = {
+			isa = PBXGroup;
+			children = (
+				02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */,
+				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
+			);
+			path = FirstScreen;
+			sourceTree = "<group>";
+		};
 		02FF1CAA2747BE0A009397BF = {
 			isa = PBXGroup;
 			children = (
@@ -109,14 +146,12 @@
 		02FF1CB52747BE0A009397BF /* Countries */ = {
 			isa = PBXGroup;
 			children = (
-				02B0919727551D1300E9CF1A /* API.swift */,
-				02FF1D38274EECA8009397BF /* Apollo.swift */,
-				02FF1CB62747BE0A009397BF /* AppDelegate.swift */,
-				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
-				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
-				02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */,
+				02B091B227620ED800E9CF1A /* Headers */,
+				02B091B127620EC100E9CF1A /* API */,
+				02B091B027620EA200E9CF1A /* Delegates */,
+				02B091B32762100200E9CF1A /* FirstScreen */,
 				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
-				02B0919D27590C7D00E9CF1A /* CountryTableViewHeader.swift */,
+				02B091AE27620B8800E9CF1A /* PublicConstants.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
 				02FF1CC12747BE0C009397BF /* LaunchScreen.storyboard */,
 				02FF1CC42747BE0C009397BF /* Info.plist */,
@@ -300,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02B0919E27590C7D00E9CF1A /* CountryTableViewHeader.swift in Sources */,
+				02B091AF27620B8800E9CF1A /* PublicConstants.swift in Sources */,
 				02FF1CBB2747BE0A009397BF /* DetailsViewController.swift in Sources */,
 				02FF1CB72747BE0A009397BF /* AppDelegate.swift in Sources */,
 				02FF1D27274CFF7D009397BF /* ListViewController.swift in Sources */,
