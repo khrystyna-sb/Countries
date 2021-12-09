@@ -74,7 +74,6 @@ class CountryTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: Constants.fontSize)
-        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
