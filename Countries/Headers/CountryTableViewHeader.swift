@@ -14,7 +14,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
         static let earthImageName = "earth"
         static let backgroundColor = UIColor(red: 0.945, green: 0.945, blue: 0.945, alpha: 1)
         static let fontSize: CGFloat = 44
-        static let labelText = "Choose a card"
+        static let labelText = "Choose a card :)"
     }
     
     static let identifier = "CountryTableViewHeader"

@@ -18,6 +18,7 @@ class CountryTableViewCell: UITableViewCell {
         static let gradientSecondColor = CGColor(red: 186/255, green: 123/255, blue: 0, alpha: 0.5)
         static let cornerRadius: CGFloat = 15
         static let fontSize: CGFloat = 14
+        static let notAvailable = "NA"
     }
     
     static let identifier = "CountryTableViewCell"
@@ -140,7 +141,7 @@ class CountryTableViewCell: UITableViewCell {
     
     public func configure(counrty: CountriesApiQuery.Data.Country) {
         nameLabel.text = "country\n" + counrty.name.uppercased()
-        capitalLabel.text = "capital\n" + (counrty.capital?.uppercased() ?? "NA")
+        capitalLabel.text = "capital\n" + (counrty.capital?.uppercased() ?? Constants.notAvailable)
         regionLabel.text = "region\n" + counrty.continent.name.uppercased()
         flagImageView.image = UIImage(named: counrty.code.lowercased())
     }

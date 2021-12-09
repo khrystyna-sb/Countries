@@ -15,13 +15,6 @@ class ListViewController: UITableViewController {
     
     var countries: [CountriesApiQuery.Data.Country] = []
     
-//    var navigationBarTitleView: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = UIColor(red: 0.839, green: 0.761, blue: 0.553, alpha: 0.5)
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,8 +25,6 @@ class ListViewController: UITableViewController {
     
     func setupNavigationItem() {
         self.navigationItem.title = "Country list"
-//        navigationController?.navigationBar.barTintColor = UIColor.green
-//        self.navigationItem.titleView = navigationBarTitleView
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
