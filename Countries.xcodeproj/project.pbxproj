@@ -88,6 +88,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02B091B027620EA200E9CF1A /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
+				02FF1CB62747BE0A009397BF /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		02B091B127620EC100E9CF1A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				02B0919727551D1300E9CF1A /* API.swift */,
+				02FF1D38274EECA8009397BF /* Apollo.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		02B091B227620ED800E9CF1A /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				02B0919D27590C7D00E9CF1A /* CountryTableViewHeader.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
 		02FF1CAA2747BE0A009397BF = {
 			isa = PBXGroup;
 			children = (
@@ -111,14 +137,12 @@
 		02FF1CB52747BE0A009397BF /* Countries */ = {
 			isa = PBXGroup;
 			children = (
-				02B0919727551D1300E9CF1A /* API.swift */,
-				02FF1D38274EECA8009397BF /* Apollo.swift */,
-				02FF1CB62747BE0A009397BF /* AppDelegate.swift */,
-				02FF1CB82747BE0A009397BF /* SceneDelegate.swift */,
+				02B091B227620ED800E9CF1A /* Headers */,
+				02B091B127620EC100E9CF1A /* API */,
+				02B091B027620EA200E9CF1A /* Delegates */,
 				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
 				02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */,
 				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
-				02B0919D27590C7D00E9CF1A /* CountryTableViewHeader.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
 				02FF1CC12747BE0C009397BF /* LaunchScreen.storyboard */,
 				02FF1CC42747BE0C009397BF /* Info.plist */,
