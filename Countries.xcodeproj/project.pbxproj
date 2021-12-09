@@ -126,6 +126,14 @@
 			path = FirstScreen;
 			sourceTree = "<group>";
 		};
+		02B091B6276245C600E9CF1A /* SecondScreen */ = {
+			isa = PBXGroup;
+			children = (
+				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
+			);
+			path = SecondScreen;
+			sourceTree = "<group>";
+		};
 		02FF1CAA2747BE0A009397BF = {
 			isa = PBXGroup;
 			children = (
@@ -153,7 +161,7 @@
 				02B091B127620EC100E9CF1A /* API */,
 				02B091B027620EA200E9CF1A /* Delegates */,
 				02B091B32762100200E9CF1A /* FirstScreen */,
-				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
+				02B091B6276245C600E9CF1A /* SecondScreen */,
 				02B091AE27620B8800E9CF1A /* PublicConstants.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
 				02FF1CC12747BE0C009397BF /* LaunchScreen.storyboard */,

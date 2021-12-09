@@ -36,7 +36,7 @@ class DetailsVCHeader: UIView {
     
    private let flagsView: UIImageView = {
         let imageView = UIImageView()
-       imageView.image = Constants.wingImage
+        imageView.image = Constants.wingImage
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
