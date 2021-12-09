@@ -17,13 +17,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let masterController = ListViewController()
         let masterNavigationController = UINavigationController(rootViewController: masterController)
+        UINavigationBar.appearance().isTranslucent = false
         
         let detailController = DetailsViewController()
         let detailNavigationController = UINavigationController(rootViewController: detailController)
         
-        let splitViewController =  UISplitViewController()
+        let splitViewController = UISplitViewController()
         splitViewController.viewControllers = [masterNavigationController, detailNavigationController]
-        
         splitViewController.delegate = self
         
         self.window = UIWindow(windowScene: windowScene)
