@@ -12,14 +12,14 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
     
     private enum Constants {
         static let earthImageName = "earth"
-        static let labelText = "Choose a card :)"
         static let backgroundColor = UIColor(red: 0.945, green: 0.945, blue: 0.945, alpha: 1)
         static let fontSize: CGFloat = 44
+        static let labelText = "Choose a card"
     }
     
     static let identifier = "CountryTableViewHeader"
-    
-    let stackView: UIStackView = {
+
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -27,17 +27,18 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
         return stackView
     }()
     
-    let earthImageView: UIImageView = {
+    private var earthImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: Constants.earthImageName)
         return imageView
     }()
     
-    let label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: Constants.fontSize, weight: .medium)
+        label.numberOfLines = 2
         label.text = Constants.labelText
         return label
     }()
@@ -56,7 +57,7 @@ class CountryTableViewHeader: UITableViewHeaderFooterView {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(earthImageView)
         stackView.addArrangedSubview(label)
-        
+
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),

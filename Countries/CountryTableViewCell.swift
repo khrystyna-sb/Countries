@@ -1,40 +1,26 @@
 //
-//  CountryTableViewCell.swift
+//  ListHeader.swift
 //  Countries
 //
-//  Created by Khrystyna Matasova on 26.11.2021.
+//  Created by Khrystyna Matasova on 02.12.2021.
 //
 
+import Foundation
 import UIKit
 
-class CountryTableViewCell: UITableViewCell {
+
+class CountryTableViewHeader: UITableViewHeaderFooterView {
     
     private enum Constants {
-        static let indent: CGFloat = 2.0
-        static let indentMainFromCell: CGFloat = 15.0
-        static let spacing: CGFloat = 20
-        static let gradientFirstColor = CGColor(red: 1, green: 228/255, blue: 133/255, alpha: 0.5)
-        static let gradientSecondColor = CGColor(red: 186/255, green: 123/255, blue: 0, alpha: 0.5)
+        static let earthImageName = "earth"
+        static let backgroundColor = UIColor(red: 0.945, green: 0.945, blue: 0.945, alpha: 1)
+        static let fontSize: CGFloat = 44
+        static let labelText = "Choose a card"
     }
     
-    static let identifier = "CountryTableViewCell"
-    
-    private let containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let horisontalStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = Constants.spacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private let verticalStackView: UIStackView = {
+    static let identifier = "CountryTableViewHeader"
+
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -42,99 +28,42 @@ class CountryTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private let flagImageView: UIImageView = {
+    private var earthImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: Constants.earthImageName)
         return imageView
     }()
     
-    lazy private var nameLabel: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: Constants.fontSize, weight: .medium)
+        label.numberOfLines = 2
+        label.text = Constants.labelText
         return label
     }()
     
-    lazy private var capitalLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        return label
-    }()
-    
-    lazy private var regionLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        return label
-    }()
-    
-    let gradient: CAGradientLayer = {
-        let gradient = CAGradientLayer()
-        gradient.colors = [
-            Constants.gradientFirstColor,
-            Constants.gradientSecondColor
-        ]
-        gradient.locations = [0.22, 1]
-        return gradient
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.addSubview(containerView)
-        setupContainerView()
-        setupStackViews()
-        setupConstraints()
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        configureContents()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradient.frame = containerView.bounds
-    }
-    
-    private func setupContainerView() {
-        containerView.layer.addSublayer(gradient)
-        containerView.addSubview(horisontalStackView)
-    }
-    
-    private func setupStackViews() {
-        horisontalStackView.addArrangedSubview(flagImageView)
-        horisontalStackView.addArrangedSubview(verticalStackView)
-        
-        verticalStackView.addArrangedSubview(nameLabel)
-        verticalStackView.addArrangedSubview(capitalLabel)
-        verticalStackView.addArrangedSubview(regionLabel)
-    }
-    
-    private func setupConstraints() {
-        
+    func configureContents() {
+        contentView.backgroundColor = Constants.backgroundColor
+        contentView.addSubview(stackView)
+        stackView.addArrangedSubview(earthImageView)
+        stackView.addArrangedSubview(label)
+
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indentMainFromCell),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.indentMainFromCell),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.indentMainFromCell),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indentMainFromCell),
-            
-            horisontalStackView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            horisontalStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            horisontalStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            horisontalStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
         ])
-    }
-    
-    public func configure(counrty: CountriesApiQuery.Data.Country) {
-        nameLabel.text = counrty.name
-        capitalLabel.text = counrty.capital
-        regionLabel.text = counrty.continent.name
-        flagImageView.image = UIImage(named: counrty.code.lowercased())
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        nameLabel.text = nil
-        capitalLabel.text = nil
-        flagImageView.image = nil
     }
 }
