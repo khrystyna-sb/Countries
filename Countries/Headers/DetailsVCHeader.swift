@@ -14,6 +14,8 @@ class DetailsVCHeader: UIView {
     
     private enum Constants {
         static let spacing: CGFloat = -60.0
+        static let earthImageName = "earth"
+        static let wingImageName = "wing"
     }
     
     private let stackView: UIStackView = {
@@ -27,7 +29,7 @@ class DetailsVCHeader: UIView {
     
     var earthView: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(named: "earth")
+        let image = UIImage(named: Constants.earthImageName)
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -35,7 +37,7 @@ class DetailsVCHeader: UIView {
     
    private let flagsView: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(named: "wing")
+       let image = UIImage(named: Constants.wingImageName)
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
         return imageView

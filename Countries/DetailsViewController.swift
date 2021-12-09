@@ -19,6 +19,10 @@ class DetailsViewController: UIViewController {
         static let leadingAnchorConstant: CGFloat = 34.0
         static let trailingAnchorConstant: CGFloat = 112.0
         static let bottomAnchorConstant: CGFloat = 58.0
+        static let cornerRadius: CGFloat = 5
+        static let redBallImageName = "ellipse1"
+        static let greenBallImageName = "ellipse2"
+        static let vectorImageName = "vector"
     }
     
     let containerView: UIView = {
@@ -46,7 +50,7 @@ class DetailsViewController: UIViewController {
         view.contentMode = .scaleAspectFit
         
         if UIDevice.current.userInterfaceIdiom == .phone {
-        view.backgroundColor = Constants.backgroundColor
+            view.backgroundColor = Constants.backgroundColor
         }
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +73,7 @@ class DetailsViewController: UIViewController {
         if UIDevice.current.userInterfaceIdiom == .pad {
             defaultImage()
         }
-     
+        
         if country != nil {
             defaultView.isHidden = true
             createLabelsAndFlag()
@@ -94,7 +98,7 @@ class DetailsViewController: UIViewController {
         guard let country = country else { return }
         
         let layer = CALayer()
-        layer.cornerRadius = 5
+        layer.cornerRadius = Constants.cornerRadius
         flagImageView.layer.addSublayer(layer)
         
         let image = UIImage(named: country.code.lowercased())
@@ -102,7 +106,7 @@ class DetailsViewController: UIViewController {
     }
     
     private func configureContents() {
-  
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
             constraintsForIpad()
         } else {
@@ -125,12 +129,12 @@ class DetailsViewController: UIViewController {
             headerView.heightAnchor.constraint(equalToConstant: PublicConstants.heightForHeader),
             headerView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
             headerView.topAnchor.constraint(equalTo: containerView.topAnchor),
-
+            
             flagImageView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Constants.indent),
             flagImageView.widthAnchor.constraint(equalToConstant: Constants.flagWidth),
             flagImageView.heightAnchor.constraint(equalToConstant: Constants.flagHeigth),
             flagImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.indent),
-   
+            
             
             mainStackView.topAnchor.constraint(equalTo: flagImageView.bottomAnchor, constant: Constants.indent),
             mainStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.indent),
@@ -138,7 +142,6 @@ class DetailsViewController: UIViewController {
             mainStackView.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
     
     private func constraintsForIphone() {
         view.addSubview(headerView)
@@ -163,7 +166,6 @@ class DetailsViewController: UIViewController {
             
         ])
     }
-
     
     private func createLabelsAndFlag() {
         
@@ -213,15 +215,15 @@ class DetailsViewController: UIViewController {
             imageView.contentMode = .scaleAspectFit
             
             if i % 2 == 0 {
-                let image = UIImage(named: "ellipse1")
+                let image = UIImage(named: Constants.redBallImageName)
                 imageView.image = image
             } else {
-                let image = UIImage(named: "ellipse2")
+                let image = UIImage(named: Constants.greenBallImageName)
                 imageView.image = image
             }
             
             let vectorImage = UIImageView()
-            vectorImage.image = UIImage(named: "vector")
+            vectorImage.image = UIImage(named: Constants.vectorImageName)
             vectorImage.contentMode = .scaleAspectFit
             
             let verticalStackView = UIStackView()
