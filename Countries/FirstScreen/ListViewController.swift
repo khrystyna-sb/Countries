@@ -14,6 +14,7 @@ class ListViewController: UITableViewController {
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
+    var filteredCountries: [CountriesApiQuery.Data.Country] = []
     
     let refrechControll: UIRefreshControl = {
         let refrechControll = UIRefreshControl()
@@ -95,6 +96,32 @@ class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return (UIDevice.current.userInterfaceIdiom == .phone) ? PublicConstants.heightForHeader : 0
+    }
+
+    func filterContentForSearchText(searchText: String) {
+        filteredCountries = countries.filter({
+            $0.continent.name.lowercased().contains(searchText.lowercased()) ||
+            ($0.capital ?? "NA").lowercased().contains(searchText.lowercased()) ||
+            $0.name.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
+
+    func isSearchBarEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    func isFiltering() -> Bool {
+        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+        return searchController.isActive && (!isSearchBarEmpty() || searchBarScopeIsFiltering)
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text ?? "")
+    }
+
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchText: searchBar.text ?? "")
     }
 }
 
