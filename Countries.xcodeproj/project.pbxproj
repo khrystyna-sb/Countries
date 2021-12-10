@@ -99,15 +99,6 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
-		02B091B127620EC100E9CF1A /* API */ = {
-			isa = PBXGroup;
-			children = (
-				02B0919727551D1300E9CF1A /* API.swift */,
-				02FF1D38274EECA8009397BF /* Apollo.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
 		02B091B227620ED800E9CF1A /* Headers */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,8 +148,9 @@
 		02FF1CB52747BE0A009397BF /* Countries */ = {
 			isa = PBXGroup;
 			children = (
+				02B0919727551D1300E9CF1A /* API.swift */,
+				02FF1D38274EECA8009397BF /* Apollo.swift */,
 				02B091B227620ED800E9CF1A /* Headers */,
-				02B091B127620EC100E9CF1A /* API */,
 				02B091B027620EA200E9CF1A /* Delegates */,
 				02B091B32762100200E9CF1A /* FirstScreen */,
 				02B091B6276245C600E9CF1A /* SecondScreen */,
