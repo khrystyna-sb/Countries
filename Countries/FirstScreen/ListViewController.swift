@@ -28,9 +28,15 @@ class ListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupRefreshController()
         setupNavigationItem()
         registerTableView()
         loadData()
+    }
+    
+    func setupRefreshController() {
+        tableView.refreshControl = refrechControll
+        tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender: )), for: .valueChanged)
     }
     
     func setupNavigationItem() {
