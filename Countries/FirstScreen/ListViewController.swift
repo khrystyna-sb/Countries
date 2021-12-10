@@ -27,10 +27,10 @@ class ListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        registerTableView()
         setupRefreshController()
         setupNavigationItem()
-        registerTableView()
         loadData()
     }
     
