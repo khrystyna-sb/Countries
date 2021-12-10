@@ -21,8 +21,7 @@ class ListViewController: UITableViewController {
     }()
 
     @objc private func refresh(sender: UIRefreshControl) {
-        loadData()
-        sender.endRefreshing()
+        loadData(sender: sender)
     }
 
     override func viewDidLoad() {
@@ -90,7 +89,7 @@ class ListViewController: UITableViewController {
 }
 
 extension ListViewController {
-    func loadData() {
+    func loadData(sender: UIRefreshControl? = nil) {
         
         let query = CountriesApiQuery()
         guard let client = Apollo.shared.client else { return }
@@ -108,5 +107,6 @@ extension ListViewController {
                 print("Error loading data \(error)")
             }
         }
+        sender?.endRefreshing()
     }
 }
