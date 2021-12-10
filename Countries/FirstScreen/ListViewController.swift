@@ -70,15 +70,20 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() { return filteredCountries.count }
         return countries.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
-        let country = countries[indexPath.row]
+        let country: CountriesApiQuery.Data.Country
+        if isFiltering() {
+            country = filteredCountries[indexPath.row]
+        } else {
+            country = countries[indexPath.row]
+        }
         cell.configure(counrty: country)
-        
         return cell
     }
     
