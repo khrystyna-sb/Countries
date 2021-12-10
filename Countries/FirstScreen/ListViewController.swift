@@ -20,6 +20,15 @@ class ListViewController: UITableViewController {
         return refrechControll
     }()
 
+    let searchController: UISearchController = {
+        let controller = UISearchController()
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.searchBar.sizeToFit()
+        controller.searchBar.searchBarStyle = .prominent
+        controller.searchBar.placeholder = "Find Countries"
+        return controller
+    }()
+
     @objc private func refresh(sender: UIRefreshControl) {
         loadData()
         sender.endRefreshing()
