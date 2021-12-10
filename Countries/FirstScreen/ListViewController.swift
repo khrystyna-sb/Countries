@@ -20,6 +20,11 @@ class ListViewController: UITableViewController {
         return refrechControll
     }()
 
+    @objc private func refresh(sender: UIRefreshControl) {
+        loadData()
+        sender.endRefreshing()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
