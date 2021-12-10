@@ -15,6 +15,11 @@ class ListViewController: UITableViewController {
     
     var countries: [CountriesApiQuery.Data.Country] = []
     
+    let refrechControll: UIRefreshControl = {
+        let refrechControll = UIRefreshControl()
+        return refrechControll
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
