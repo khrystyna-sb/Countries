@@ -15,14 +15,10 @@ class ListViewController: UITableViewController {
     
     var countries: [CountriesApiQuery.Data.Country] = []
     
-    let refrechControll: UIRefreshControl = {
+    let refrechControl: UIRefreshControl = {
         let refrechControll = UIRefreshControl()
         return refrechControll
     }()
-
-    @objc private func refresh(sender: UIRefreshControl) {
-        loadData(sender: sender)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +30,8 @@ class ListViewController: UITableViewController {
     }
     
     func setupRefreshController() {
-        tableView.refreshControl = refrechControll
-        tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender: )), for: .valueChanged)
+        tableView.refreshControl = refrechControl
+        tableView.refreshControl?.addTarget(self, action: #selector(loadData(sender: )), for: .valueChanged)
     }
     
     func setupNavigationItem() {
@@ -89,7 +85,7 @@ class ListViewController: UITableViewController {
 }
 
 extension ListViewController {
-    func loadData(sender: UIRefreshControl? = nil) {
+    @objc func loadData(sender: UIRefreshControl? = nil) {
         
         let query = CountriesApiQuery()
         guard let client = Apollo.shared.client else { return }
