@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListViewController: UITableViewController {
+class ListViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
     private enum Constants {
         static let heightForRow: CGFloat = 179.0
@@ -40,6 +40,7 @@ class ListViewController: UITableViewController {
 
         setupRefreshController()
         setupNavigationItem()
+        setUpSearchController()
         registerTableView()
         loadData()
     }
@@ -50,10 +51,16 @@ class ListViewController: UITableViewController {
     }
     
     func setupNavigationItem() {
+        navigationItem.searchController = searchController
         self.navigationItem.title = "Country list"
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
-    
+
+    func setUpSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+    }
+
     private func registerTableView() {
         tableView.delegate = self
         tableView.dataSource = self
