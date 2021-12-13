@@ -11,6 +11,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     private enum Constants {
         static let heightForRow: CGFloat = 179.0
+        static let notAplicableField = "NA"
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
@@ -113,7 +114,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     func filterContentForSearchText(searchText: String) {
         filteredCountries = countries.filter({
             $0.continent.name.lowercased().contains(searchText.lowercased()) ||
-            ($0.capital ?? "NA").lowercased().contains(searchText.lowercased()) ||
+            ($0.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased()) ||
             $0.name.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
