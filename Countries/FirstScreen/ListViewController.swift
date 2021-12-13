@@ -126,8 +126,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
 
     func isFiltering() -> Bool {
-        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-        return searchController.isActive && (!isSearchBarEmpty() || searchBarScopeIsFiltering)
+        return searchController.isActive && !isSearchBarEmpty()
     }
 
     func updateSearchResults(for searchController: UISearchController) {
