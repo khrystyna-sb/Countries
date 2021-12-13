@@ -72,8 +72,11 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() { return filteredCountries.count }
-        return countries.count
+        if isFiltering() {
+            return filteredCountries.count
+        } else {
+            return countries.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
