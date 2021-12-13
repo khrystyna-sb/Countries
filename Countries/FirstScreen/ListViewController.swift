@@ -142,7 +142,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 }
 
 extension ListViewController {
-    @objc func loadData(sender: UIRefreshControl? = nil) {
+    func loadData(sender: UIRefreshControl? = nil) {
         let query = CountriesApiQuery()
         guard let client = Apollo.shared.client else { return }
         client.fetch(query: query) { result in
