@@ -14,6 +14,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         static let notAplicableField = "NA"
         static let searchBarPlaceHolder = "Find Countries"
         static let scopeButtonTitles = ["All", "Names", "Capitals", "Continents"]
+        static let defaultScope = "All"
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
@@ -117,11 +118,23 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         return (UIDevice.current.userInterfaceIdiom == .phone) ? PublicConstants.heightForHeader : 0
     }
 
-    func filterContentForSearchText(searchText: String) {
-        filteredCountries = countries.filter({
-            $0.continent.name.lowercased().contains(searchText.lowercased()) ||
-            ($0.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased()) ||
-            $0.name.lowercased().contains(searchText.lowercased())
+    func filterContentForSearchText(searchText: String,
+                                    scope: String = Constants.defaultScope) {
+        filteredCountries = countries.filter({ (country: CountriesApiQuery.Data.Country) -> Bool in
+            var doesCategoryMatch: Bool = isSearchBarEmpty()
+            if scope == "Names" || scope == Constants.defaultScope {
+                doesCategoryMatch = doesCategoryMatch ||
+                country.name.lowercased().contains(searchText.lowercased())
+            }
+            if scope == "Capitals" || scope == Constants.defaultScope {
+                doesCategoryMatch = doesCategoryMatch ||
+                (country.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased())
+            }
+            if scope == "Continents" || scope == Constants.defaultScope {
+                doesCategoryMatch = doesCategoryMatch ||
+                country.continent.name.lowercased().contains(searchText.lowercased())
+            }
+            return doesCategoryMatch
         })
         tableView.reloadData()
     }
@@ -135,11 +148,13 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
 
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchText: searchController.searchBar.text ?? "")
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchText: searchController.searchBar.text ?? "", scope: scope)
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchText: searchBar.text ?? "")
+        filterContentForSearchText(searchText: searchBar.text ?? "", scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 
