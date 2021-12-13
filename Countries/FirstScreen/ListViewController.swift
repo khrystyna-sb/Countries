@@ -15,10 +15,10 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     var countries: [CountriesApiQuery.Data.Country] = []
     var filteredCountries: [CountriesApiQuery.Data.Country] = []
-    
-    let refrechControll: UIRefreshControl = {
-        let refrechControll = UIRefreshControl()
-        return refrechControll
+
+    let refrechControl: UIRefreshControl = {
+        let refrechControl = UIRefreshControl()
+        return refrechControl
     }()
 
     let searchController: UISearchController = {
@@ -31,22 +31,22 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }()
 
     @objc private func refresh(sender: UIRefreshControl) {
-        loadData()
-        sender.endRefreshing()
+        searchController.searchBar.text = ""
+        loadData(sender: sender)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registerTableView()
         setupRefreshController()
         setupNavigationItem()
         setUpSearchController()
-        registerTableView()
         loadData()
     }
     
     func setupRefreshController() {
-        tableView.refreshControl = refrechControll
+        tableView.refreshControl = refrechControl
         tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender: )), for: .valueChanged)
     }
     
@@ -138,8 +138,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 }
 
 extension ListViewController {
-    func loadData() {
-        
+    @objc func loadData(sender: UIRefreshControl? = nil) {
         let query = CountriesApiQuery()
         guard let client = Apollo.shared.client else { return }
         client.fetch(query: query) { result in
@@ -156,5 +155,6 @@ extension ListViewController {
                 print("Error loading data \(error)")
             }
         }
+        sender?.endRefreshing()
     }
 }
