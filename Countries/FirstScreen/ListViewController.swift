@@ -13,6 +13,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         static let heightForRow: CGFloat = 179.0
         static let notAplicableField = "NA"
         static let searchBarPlaceHolder = "Find Countries"
+        static let scopeButtonTitles = ["All", "Names", "Capitals", "Continents"]
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
@@ -29,6 +30,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         controller.searchBar.sizeToFit()
         controller.searchBar.searchBarStyle = .prominent
         controller.searchBar.placeholder = Constants.searchBarPlaceHolder
+        controller.searchBar.scopeButtonTitles = Constants.scopeButtonTitles
         return controller
     }()
 
