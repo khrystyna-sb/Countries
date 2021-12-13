@@ -17,11 +17,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     var countries: [CountriesApiQuery.Data.Country] = []
     var filteredCountries: [CountriesApiQuery.Data.Country] = []
-
-    let refrechControl: UIRefreshControl = {
-        let refrechControl = UIRefreshControl()
-        return refrechControl
-    }()
+    let refrechControl = UIRefreshControl()
 
     let searchController: UISearchController = {
         let controller = UISearchController()
