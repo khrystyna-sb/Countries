@@ -12,6 +12,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     private enum Constants {
         static let heightForRow: CGFloat = 179.0
         static let notAplicableField = "NA"
+        static let searchBarPlaceHolder = "Find Countries"
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
@@ -27,7 +28,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         controller.obscuresBackgroundDuringPresentation = false
         controller.searchBar.sizeToFit()
         controller.searchBar.searchBarStyle = .prominent
-        controller.searchBar.placeholder = "Find Countries"
+        controller.searchBar.placeholder = Constants.searchBarPlaceHolder
         return controller
     }()
 
