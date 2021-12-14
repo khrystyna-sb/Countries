@@ -81,7 +81,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let country = countries[indexPath.row]
+        let country = filteredCountries[indexPath.row]
         let detailsVC = DetailsViewController()
         detailsVC.country = country
         
