@@ -19,11 +19,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     var countries: [CountriesApiQuery.Data.Country] = []
     var filteredCountries: [CountriesApiQuery.Data.Country] = []
-
-    let refrechControl: UIRefreshControl = {
-        let refrechControl = UIRefreshControl()
-        return refrechControl
-    }()
+    let refrechControl = UIRefreshControl()
 
     let searchController: UISearchController = {
         let controller = UISearchController()
@@ -75,29 +71,20 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
-            return filteredCountries.count
-        } else {
-            return countries.count
-        }
+        return filteredCountries.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else {return UITableViewCell()}
-        let country: CountriesApiQuery.Data.Country
-        if isFiltering() {
-            country = filteredCountries[indexPath.row]
-        } else {
-            country = countries[indexPath.row]
-        }
+        let country = filteredCountries[indexPath.row]
         cell.configure(counrty: country)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let country = countries[indexPath.row]
+        let country = filteredCountries[indexPath.row]
         let detailsVC = DetailsViewController()
         detailsVC.country = country
         
@@ -143,10 +130,6 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         return searchController.searchBar.text?.isEmpty ?? true
     }
 
-    func isFiltering() -> Bool {
-        return searchController.isActive && !isSearchBarEmpty()
-    }
-
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
@@ -168,6 +151,7 @@ extension ListViewController {
             case .success(let graphQLResult):
                 if let countries = graphQLResult.data?.countries.compactMap({ $0 }) {
                     self.countries = countries
+                    self.filteredCountries = countries
                     self.tableView.reloadData()
                 }
                 
