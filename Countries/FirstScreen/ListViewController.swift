@@ -9,8 +9,11 @@ import UIKit
 
 class ListViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
 
-    enum Scopes: Int, CaseIterable {
-        case All = 0, Names, Capitals, Continents
+    enum Scopes: Int {
+        case all
+        case names
+        case capitals
+        case continent
     }
     
     private enum Constants {
