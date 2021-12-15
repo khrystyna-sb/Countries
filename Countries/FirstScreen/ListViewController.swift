@@ -47,11 +47,13 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         controller.hidesNavigationBarDuringPresentation = false
         controller.searchBar.placeholder = Constants.searchBarPlaceHolder
         controller.searchBar.scopeButtonTitles = Scopes.titles
+        controller.searchBar.setShowsCancelButton(false, animated: false)
         return controller
     }()
 
     @objc private func refresh(sender: UIRefreshControl) {
         searchController.searchBar.text = ""
+        searchController.searchBar.endEditing(true)
         loadData(sender: sender)
     }
 
