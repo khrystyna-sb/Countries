@@ -129,8 +129,9 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 
     func filterContentForSearchText(searchText: String,
                                     scopeIndex: Scopes = .all) {
+        if isSearchBarEmpty() { return }
         filteredCountries = countries.filter({ (country: CountriesApiQuery.Data.Country) -> Bool in
-            var doesCategoryMatch: Bool = isSearchBarEmpty()
+            var doesCategoryMatch: Bool = false
             switch scopeIndex {
             case .names:
                 doesCategoryMatch = doesCategoryMatch ||
