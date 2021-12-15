@@ -8,7 +8,7 @@
 import UIKit
 
 class ListViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
-    
+
     enum Scopes: Int, CaseIterable {
         case All = 0, Names, Capitals, Continents
     }
@@ -22,13 +22,12 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     var countries: [CountriesApiQuery.Data.Country] = []
     var filteredCountries: [CountriesApiQuery.Data.Country] = []
-    let refrechControl = UIRefreshControl()
+    let tableRefreshControl = UIRefreshControl()
 
     let searchController: UISearchController = {
         let controller = UISearchController()
-        controller.obscuresBackgroundDuringPresentation = false
-        controller.searchBar.sizeToFit()
-        controller.searchBar.searchBarStyle = .prominent
+        controller.searchBar.searchBarStyle = .minimal
+        controller.hidesNavigationBarDuringPresentation = false
         controller.searchBar.placeholder = Constants.searchBarPlaceHolder
         controller.searchBar.scopeButtonTitles = Constants.scopeButtonTitles
         return controller
@@ -50,14 +49,14 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
     
     func setupRefreshController() {
-        tableView.refreshControl = refrechControl
+        tableView.refreshControl = tableRefreshControl
         tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender: )), for: .valueChanged)
     }
     
     func setupNavigationItem() {
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
         self.navigationItem.title = "Country list"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     func setUpSearchController() {
@@ -148,6 +147,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         if let scope = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
             filterContentForSearchText(searchText: searchBar.text ?? "", scope: scope)
         }
+        filterContentForSearchText(searchText: searchController.searchBar.text ?? "")
     }
 }
 
