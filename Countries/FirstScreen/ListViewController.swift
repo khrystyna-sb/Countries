@@ -62,6 +62,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     func setUpSearchController() {
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
+        searchController.searchBar.tintColor = .black
     }
 
     private func registerTableView() {
