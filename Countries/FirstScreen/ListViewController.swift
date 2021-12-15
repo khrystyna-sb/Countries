@@ -112,20 +112,20 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
 
     func filterContentForSearchText(searchText: String,
-                                    scopeIndex: Scopes = .All) {
+                                    scopeIndex: Scopes = .all) {
         filteredCountries = countries.filter({ (country: CountriesApiQuery.Data.Country) -> Bool in
             var doesCategoryMatch: Bool = isSearchBarEmpty()
             switch scopeIndex {
-            case .Names:
+            case .names:
                 doesCategoryMatch = doesCategoryMatch ||
                 country.name.lowercased().contains(searchText.lowercased())
-            case .Capitals:
+            case .capitals:
                 doesCategoryMatch = doesCategoryMatch ||
                 (country.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased())
-            case .Continents:
+            case .continent:
                 doesCategoryMatch = doesCategoryMatch ||
                 country.continent.name.lowercased().contains(searchText.lowercased())
-            case .All:
+            case .all:
                 doesCategoryMatch = doesCategoryMatch ||
                 country.name.lowercased().contains(searchText.lowercased()) ||
                 (country.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased()) ||
