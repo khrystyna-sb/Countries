@@ -130,25 +130,26 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     func filterContentForSearchText(searchText: String,
                                     scopeIndex: Scopes = .all) {
         if isSearchBarEmpty() { return }
-        filteredCountries = countries.filter({ (country: CountriesApiQuery.Data.Country) -> Bool in
-            var doesCategoryMatch: Bool = false
-            switch scopeIndex {
-            case .names:
-                doesCategoryMatch = doesCategoryMatch ||
-                country.name.lowercased().contains(searchText.lowercased())
-            case .capitals:
-                doesCategoryMatch = doesCategoryMatch ||
-                (country.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased())
-            case .continents:
-                doesCategoryMatch = doesCategoryMatch ||
-                country.continent.name.lowercased().contains(searchText.lowercased())
-            case .all:
-                doesCategoryMatch = doesCategoryMatch ||
-                country.name.lowercased().contains(searchText.lowercased()) ||
-                (country.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased()) ||
-                country.continent.name.lowercased().contains(searchText.lowercased())
+        var filter: (_ array: [String]) -> Bool {
+            { array in
+                !array.map({ $0.lowercased().contains(searchText.lowercased()) }).allSatisfy({ !$0 })
             }
-            return doesCategoryMatch
+        }
+        filteredCountries = countries.filter({ (country: CountriesApiQuery.Data.Country) -> Bool in
+            var array: [String] = []
+            switch scopeIndex {
+            case .all:
+                fallthrough
+            case .names:
+                array.append(country.name)
+                if scopeIndex == .all { fallthrough }
+            case .capitals:
+                array.append(country.capital ?? Constants.notAplicableField)
+                if scopeIndex == .all { fallthrough }
+            case .continents:
+                array.append(country.continent.name)
+            }
+            return filter(array)
         })
         tableView.reloadData()
     }
