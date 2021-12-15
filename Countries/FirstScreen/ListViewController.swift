@@ -21,15 +21,14 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 
     let searchController: UISearchController = {
         let controller = UISearchController()
-        controller.obscuresBackgroundDuringPresentation = false
-        controller.searchBar.sizeToFit()
-        controller.searchBar.searchBarStyle = .prominent
+        controller.searchBar.searchBarStyle = .minimal
+        controller.hidesNavigationBarDuringPresentation = false
         controller.searchBar.placeholder = Constants.searchBarPlaceHolder
         return controller
     }()
 
     @objc private func refresh(sender: UIRefreshControl) {
-        searchController.searchBar.text = ""
+        self.searchController.searchBar.text = ""
         loadData(sender: sender)
     }
 
@@ -49,9 +48,9 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
     
     func setupNavigationItem() {
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
         self.navigationItem.title = "Country list"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     func setUpSearchController() {
@@ -108,6 +107,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
             ($0.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased()) ||
             $0.name.lowercased().contains(searchText.lowercased())
         })
+        if isSearchBarEmpty() { filteredCountries = countries }
         tableView.reloadData()
     }
 
