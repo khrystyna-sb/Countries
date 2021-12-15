@@ -108,10 +108,10 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
 
     func filterContentForSearchText(searchText: String,
-                                    scope: Scopes = .All) {
+                                    scopeIndex: Scopes = .All) {
         filteredCountries = countries.filter({ (country: CountriesApiQuery.Data.Country) -> Bool in
             var doesCategoryMatch: Bool = isSearchBarEmpty()
-            switch scope {
+            switch scopeIndex {
             case .Names:
                 doesCategoryMatch = doesCategoryMatch ||
                 country.name.lowercased().contains(searchText.lowercased())
@@ -138,14 +138,16 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-        if let scope = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
-            filterContentForSearchText(searchText: searchController.searchBar.text ?? "", scope: scope)
+        if let scopeIndex = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
+            filterContentForSearchText(searchText: searchController.searchBar.text ?? "",
+                                       scopeIndex: scopeIndex)
         }
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        if let scope = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
-            filterContentForSearchText(searchText: searchBar.text ?? "", scope: scope)
+        if let scopeIndex = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
+            filterContentForSearchText(searchText: searchBar.text ?? "",
+                                       scopeIndex: scopeIndex)
         }
         filterContentForSearchText(searchText: searchController.searchBar.text ?? "")
     }
