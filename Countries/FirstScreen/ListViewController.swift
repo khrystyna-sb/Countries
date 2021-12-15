@@ -9,12 +9,15 @@ import UIKit
 
 class ListViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
+    enum Scopes: Int, CaseIterable {
+        case All = 0, Names, Capitals, Continents
+    }
+    
     private enum Constants {
         static let heightForRow: CGFloat = 179.0
         static let notAplicableField = "NA"
         static let searchBarPlaceHolder = "Find Countries"
         static let scopeButtonTitles = ["All", "Names", "Capitals", "Continents"]
-        static let defaultScope = "All"
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
@@ -106,19 +109,23 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
 
     func filterContentForSearchText(searchText: String,
-                                    scope: String = Constants.defaultScope) {
+                                    scope: Scopes = .All) {
         filteredCountries = countries.filter({ (country: CountriesApiQuery.Data.Country) -> Bool in
             var doesCategoryMatch: Bool = isSearchBarEmpty()
-            if scope == "Names" || scope == Constants.defaultScope {
+            switch scope {
+            case .Names:
                 doesCategoryMatch = doesCategoryMatch ||
                 country.name.lowercased().contains(searchText.lowercased())
-            }
-            if scope == "Capitals" || scope == Constants.defaultScope {
+            case .Capitals:
                 doesCategoryMatch = doesCategoryMatch ||
                 (country.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased())
-            }
-            if scope == "Continents" || scope == Constants.defaultScope {
+            case .Continents:
                 doesCategoryMatch = doesCategoryMatch ||
+                country.continent.name.lowercased().contains(searchText.lowercased())
+            case .All:
+                doesCategoryMatch = doesCategoryMatch ||
+                country.name.lowercased().contains(searchText.lowercased()) ||
+                (country.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased()) ||
                 country.continent.name.lowercased().contains(searchText.lowercased())
             }
             return doesCategoryMatch
@@ -132,12 +139,15 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchText: searchController.searchBar.text ?? "", scope: scope)
+        if let scope = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
+            filterContentForSearchText(searchText: searchController.searchBar.text ?? "", scope: scope)
+        }
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchText: searchBar.text ?? "", scope: searchBar.scopeButtonTitles![selectedScope])
+        if let scope = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
+            filterContentForSearchText(searchText: searchBar.text ?? "", scope: scope)
+        }
     }
 }
 
