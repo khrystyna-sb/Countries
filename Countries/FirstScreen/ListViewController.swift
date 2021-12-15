@@ -17,7 +17,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     var countries: [CountriesApiQuery.Data.Country] = []
     var filteredCountries: [CountriesApiQuery.Data.Country] = []
-    let refrechControl = UIRefreshControl()
+    let tableRefreshControl = UIRefreshControl()
 
     let searchController: UISearchController = {
         let controller = UISearchController()
@@ -43,7 +43,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
     
     func setupRefreshController() {
-        tableView.refreshControl = refrechControl
+        tableView.refreshControl = tableRefreshControl
         tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender: )), for: .valueChanged)
     }
     
