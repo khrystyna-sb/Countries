@@ -9,18 +9,32 @@ import UIKit
 
 class ListViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
 
-    enum Scopes: Int {
+    enum Scopes: Int, CaseIterable {
         case all
         case names
         case capitals
-        case continent
+        case continents
+        var title: String {
+            switch self {
+            case .all:
+                return "All"
+            case .names:
+                return "Names"
+            case .capitals:
+                return "Capitals"
+            case .continents:
+                return "Continents"
+            }
+        }
+        static var titles: [String] {
+            self.allCases.map({ $0.title })
+        }
     }
     
     private enum Constants {
         static let heightForRow: CGFloat = 179.0
         static let notAplicableField = "NA"
         static let searchBarPlaceHolder = "Find Countries"
-        static let scopeButtonTitles = ["All", "Names", "Capitals", "Continents"]
     }
     
     var countries: [CountriesApiQuery.Data.Country] = []
@@ -32,7 +46,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         controller.searchBar.searchBarStyle = .minimal
         controller.hidesNavigationBarDuringPresentation = false
         controller.searchBar.placeholder = Constants.searchBarPlaceHolder
-        controller.searchBar.scopeButtonTitles = Constants.scopeButtonTitles
+        controller.searchBar.scopeButtonTitles = Scopes.titles
         return controller
     }()
 
@@ -122,7 +136,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
             case .capitals:
                 doesCategoryMatch = doesCategoryMatch ||
                 (country.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased())
-            case .continent:
+            case .continents:
                 doesCategoryMatch = doesCategoryMatch ||
                 country.continent.name.lowercased().contains(searchText.lowercased())
             case .all:
