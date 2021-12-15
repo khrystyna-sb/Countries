@@ -107,6 +107,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
             ($0.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased()) ||
             $0.name.lowercased().contains(searchText.lowercased())
         })
+        //  TODO change filter condition
         if isSearchBarEmpty() { filteredCountries = countries }
         tableView.reloadData()
     }
