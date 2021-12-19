@@ -4,7 +4,6 @@
 //
 //  Created by Khrystyna Matasova on 23.11.2021.
 //
-
 import UIKit
 
 class ListViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
@@ -33,7 +32,6 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     private enum Constants {
         static let heightForRow: CGFloat = 179.0
-        static let notAplicableField = "NA"
         static let searchBarPlaceHolder = "Find Countries"
     }
     
@@ -130,27 +128,16 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     func filterContentForSearchText(searchText: String,
                                     scopeIndex: Scopes = .all) {
         if isSearchBarEmpty() { return }
-        var filter: (_ array: [String]) -> Bool {
-            { array in
-                !array.map({ $0.lowercased().contains(searchText.lowercased()) }).allSatisfy({ !$0 })
-            }
+        switch scopeIndex {
+        case .all:
+            filteredCountries = countries.filterCounties(searchText: searchText)
+        case .names:
+            filteredCountries = countries.filterByName(searchText: searchText)
+        case .capitals:
+            filteredCountries = countries.filterByCapital(searchText: searchText)
+        case .continents:
+            filteredCountries = countries.filterByContinent(searchText: searchText)
         }
-        filteredCountries = countries.filter({ (country: CountriesApiQuery.Data.Country) -> Bool in
-            var array: [String] = []
-            switch scopeIndex {
-            case .all:
-                fallthrough
-            case .names:
-                array.append(country.name)
-                if scopeIndex == .all { fallthrough }
-            case .capitals:
-                array.append(country.capital ?? Constants.notAplicableField)
-                if scopeIndex == .all { fallthrough }
-            case .continents:
-                array.append(country.continent.name)
-            }
-            return filter(array)
-        })
         tableView.reloadData()
     }
 
@@ -195,5 +182,35 @@ extension ListViewController {
             }
         }
         sender?.endRefreshing()
+    }
+}
+
+extension String {
+    func containSearchText(searchText: String) -> Bool {
+        return lowercased().contains(searchText.lowercased())
+    }
+}
+
+extension Array where Element == CountriesApiQuery.Data.Country {
+    typealias Country = CountriesApiQuery.Data.Country
+    private struct Constants {
+        static let notApplicableField: String = "N-A"
+    }
+
+    func filterByName(searchText: String) -> [Country] {
+        return filter { $0.name.containSearchText(searchText: searchText) }
+    }
+    func filterByCapital(searchText: String) -> [Country] {
+        return filter { ($0.capital ?? Constants.notApplicableField).containSearchText(searchText: searchText) }
+    }
+    func filterByContinent(searchText: String) -> [Country] {
+        return filter { $0.continent.name.containSearchText(searchText: searchText) }
+    }
+    func filterCounties(searchText: String) -> [Country] {
+        return filter {
+            $0.name.containSearchText(searchText: searchText) ||
+            ($0.capital ?? Constants.notApplicableField).containSearchText(searchText: searchText) ||
+            $0.continent.name.containSearchText(searchText: searchText)
+        }
     }
 }
