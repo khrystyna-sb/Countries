@@ -4,14 +4,34 @@
 //
 //  Created by Khrystyna Matasova on 23.11.2021.
 //
-
 import UIKit
 
 class ListViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+
+    enum Scopes: Int, CaseIterable {
+        case all
+        case names
+        case capitals
+        case continents
+        var title: String {
+            switch self {
+            case .all:
+                return "All"
+            case .names:
+                return "Names"
+            case .capitals:
+                return "Capitals"
+            case .continents:
+                return "Continents"
+            }
+        }
+        static var titles: [String] {
+            self.allCases.map({ $0.title })
+        }
+    }
     
     private enum Constants {
         static let heightForRow: CGFloat = 179.0
-        static let notAplicableField = "NA"
         static let searchBarPlaceHolder = "Find Countries"
     }
     
@@ -24,11 +44,14 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         controller.searchBar.searchBarStyle = .minimal
         controller.hidesNavigationBarDuringPresentation = false
         controller.searchBar.placeholder = Constants.searchBarPlaceHolder
+        controller.searchBar.scopeButtonTitles = Scopes.titles
+        controller.searchBar.setShowsCancelButton(false, animated: false)
         return controller
     }()
 
     @objc private func refresh(sender: UIRefreshControl) {
-        self.searchController.searchBar.text = ""
+        searchController.searchBar.text = ""
+        searchController.searchBar.endEditing(true)
         loadData(sender: sender)
     }
 
@@ -56,6 +79,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     func setUpSearchController() {
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
+        searchController.searchBar.tintColor = .black
     }
 
     private func registerTableView() {
@@ -101,14 +125,19 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         return (UIDevice.current.userInterfaceIdiom == .phone) ? PublicConstants.heightForHeader : 0
     }
 
-    func filterContentForSearchText(searchText: String) {
-        filteredCountries = countries.filter({
-            $0.continent.name.lowercased().contains(searchText.lowercased()) ||
-            ($0.capital ?? Constants.notAplicableField).lowercased().contains(searchText.lowercased()) ||
-            $0.name.lowercased().contains(searchText.lowercased())
-        })
-        //  TODO change filter condition
-        if isSearchBarEmpty() { filteredCountries = countries }
+    func filterContentForSearchText(searchText: String,
+                                    scopeIndex: Scopes = .all) {
+        if isSearchBarEmpty() { return }
+        switch scopeIndex {
+        case .all:
+            filteredCountries = countries.filterCounties(searchText: searchText)
+        case .names:
+            filteredCountries = countries.filterByName(searchText: searchText)
+        case .capitals:
+            filteredCountries = countries.filterByCapital(searchText: searchText)
+        case .continents:
+            filteredCountries = countries.filterByContinent(searchText: searchText)
+        }
         tableView.reloadData()
     }
 
@@ -117,11 +146,19 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     }
 
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchText: searchController.searchBar.text ?? "")
+        let searchBar = searchController.searchBar
+        if let scopeIndex = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
+            filterContentForSearchText(searchText: searchController.searchBar.text ?? "",
+                                       scopeIndex: scopeIndex)
+        }
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchText: searchBar.text ?? "")
+        if let scopeIndex = Scopes(rawValue: searchBar.selectedScopeButtonIndex) {
+            filterContentForSearchText(searchText: searchBar.text ?? "",
+                                       scopeIndex: scopeIndex)
+        }
+        filterContentForSearchText(searchText: searchController.searchBar.text ?? "")
     }
 }
 
@@ -145,5 +182,35 @@ extension ListViewController {
             }
         }
         sender?.endRefreshing()
+    }
+}
+
+extension String {
+    func containSearchText(searchText: String) -> Bool {
+        return lowercased().contains(searchText.lowercased())
+    }
+}
+
+extension Array where Element == CountriesApiQuery.Data.Country {
+    typealias Country = CountriesApiQuery.Data.Country
+    private struct Constants {
+        static let notApplicableField: String = "N-A"
+    }
+
+    func filterByName(searchText: String) -> [Country] {
+        return filter { $0.name.containSearchText(searchText: searchText) }
+    }
+    func filterByCapital(searchText: String) -> [Country] {
+        return filter { ($0.capital ?? Constants.notApplicableField).containSearchText(searchText: searchText) }
+    }
+    func filterByContinent(searchText: String) -> [Country] {
+        return filter { $0.continent.name.containSearchText(searchText: searchText) }
+    }
+    func filterCounties(searchText: String) -> [Country] {
+        return filter {
+            $0.name.containSearchText(searchText: searchText) ||
+            ($0.capital ?? Constants.notApplicableField).containSearchText(searchText: searchText) ||
+            $0.continent.name.containSearchText(searchText: searchText)
+        }
     }
 }
