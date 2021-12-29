@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let masterController = ListViewController()
+        let masterController = ListViewController(networkManager: NetworkManager())
         let masterNavigationController = UINavigationController(rootViewController: masterController)
         UINavigationBar.appearance().isTranslucent = false
         
