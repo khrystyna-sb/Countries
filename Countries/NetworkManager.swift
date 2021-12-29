@@ -9,13 +9,13 @@ import Foundation
 
 protocol NetworkManagerProtocol {
     func getCountries(countries: @escaping ([CountriesApiQuery.Data.Country]?) -> Void)
-    func getCountriesMock(countries: @escaping ([CountryMockProtocol]?) -> Void)
+//    func getCountriesMock(countries: @escaping ([CountryMockProtocol]?) -> Void)
 }
 
-extension NetworkManagerProtocol {
-    func getCountries(countries: @escaping ([CountriesApiQuery.Data.Country]?) -> Void) {}
-    func getCountriesMock(countries: @escaping ([CountryMockProtocol]?) -> Void) {}
-}
+//extension NetworkManagerProtocol {
+//    func getCountries(countries: @escaping ([CountriesApiQuery.Data.Country]?) -> Void) {}
+//    func getCountriesMock(countries: @escaping ([CountryMockProtocol]?) -> Void) {}
+//}
 
 class NetworkManager: NetworkManagerProtocol {
 
@@ -35,9 +35,18 @@ class NetworkManager: NetworkManagerProtocol {
 }
 
 class MockNetworkManager: NetworkManagerProtocol {
-    func getCountriesMock(countries: @escaping ([CountryMockProtocol]?) -> Void) {
-        let counrties = CountriesMock().getCountries()
-        countries(counrties)
+//    func getCountriesMock(countries: @escaping ([CountryMockProtocol]?) -> Void) {
+//        let counrties = CountriesMock().getCountries()
+//        countries(counrties)
+//    }
+    func getCountry() -> CountriesApiQuery.Data.Country {
+        let continent = CountriesApiQuery.Data.Country.Continent(name: "testcontinent")
+        let language = CountriesApiQuery.Data.Country.Language(name: "testlanguage")
+        return CountriesApiQuery.Data.Country(code: "UA", name: "testname", capital: "testcapital", currency: "testcurrency", phone: "testphone", continent: continent, languages: [language])
+    }
+    
+    func getCountries(countries: @escaping ([CountriesApiQuery.Data.Country]?) -> Void)  {
+        countries([getCountry(), getCountry()])
     }
 }
 

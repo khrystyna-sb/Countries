@@ -62,7 +62,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     @objc private func refresh(sender: UIRefreshControl) {
         searchController.searchBar.text = ""
         searchController.searchBar.endEditing(true)
-        loadData(sender: sender)
+        getData(sender: sender)
     }
 
     override func viewDidLoad() {
@@ -72,7 +72,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         setupRefreshController()
         setupNavigationItem()
         setUpSearchController()
-        loadData()
+        getData()
     }
     
     func setupRefreshController() {
@@ -173,7 +173,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 }
 
 extension ListViewController {
-    func loadData(sender: UIRefreshControl? = nil) {
+    func getData(sender: UIRefreshControl? = nil) {
         networkManager.getCountries(countries: { countries in
             guard let countries = countries else { return }
             self.countries = countries
