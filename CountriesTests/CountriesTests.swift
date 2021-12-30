@@ -10,9 +10,14 @@ import XCTest
 
 class CountriesTests: XCTestCase {
     
-//    var listVC: ListViewController?
+    var listVC: ListViewController!
+    let indexPath = IndexPath(row: 0, section: 0)
     
-
+    override func setUp() {
+        listVC = ListViewController(networkManager: MockNetworkManager())
+        listVC.loadViewIfNeeded()
+    }
+    
     func testContainSearchTextLowercase() throws {
         let searchText = "d"
         let string = "AnDorra"
@@ -51,36 +56,22 @@ class CountriesTests: XCTestCase {
         XCTAssertNotNil(result)
     }
     
-//    override class func setUp() {
-//        super.setUp()
-//        self.listVC = ListViewController()
-//        listVC.loadView()
-//        listVC.viewDidLoad()
-//    }
-    
     func testTableViewNumberOfRows() {
-        let listVC = ListViewController(networkManager: MockNetworkManager())
         let numberOfRowsResult = listVC.tableView.numberOfRows(inSection: 0)
         let filteredCountriesCount = listVC.filteredCountries.count
         XCTAssertEqual(numberOfRowsResult, filteredCountriesCount)
     }
     
-    func testTableViewCellNotNil() throws {
-        let listVC = ListViewController(networkManager: MockNetworkManager())
-        listVC.loadViewIfNeeded()
-
-        let indexPath = IndexPath(row: 0, section: 0)
+    func testTableViewCellNotNil() {
         let cell = listVC.tableView(listVC.tableView, cellForRowAt: indexPath)
-        let cell2 = listVC.tableView.cellForRow(at: <#T##IndexPath#>)
         XCTAssertNotNil(cell)
     }
     
-//    func testTableViewCellCurrentType() {
-//        let listVC = ListViewController()
-//        listVC.tableView.dataSource(
-//        let testCell = CountryTableViewCell()
-//
-//    }
+    func testTableViewHeaderNotNill() {
+        let header = listVC.tableView(listVC.tableView, viewForHeaderInSection: 0)
+        XCTAssertNotNil(header)
+    }
+
 }
 
         
