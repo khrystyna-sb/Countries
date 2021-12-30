@@ -72,6 +72,17 @@ class CountriesTests: XCTestCase {
         XCTAssertNotNil(header)
     }
 
+    func testCurrentTypeOfCell() {
+        let cell = listVC.tableView(listVC.tableView, cellForRowAt: indexPath)
+        let isCurrentType = cell is CountryTableViewCell
+        XCTAssertTrue(isCurrentType)
+    }
+    
+    func testCurrentTypeOfHeader() {
+        let header = listVC.tableView(listVC.tableView, viewForHeaderInSection: 0)
+        let isCurrentType = header is CountryTableViewHeader
+        XCTAssertTrue(isCurrentType)
+    }
 }
 
         
