@@ -174,8 +174,8 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 
 extension ListViewController {
     func getData(sender: UIRefreshControl? = nil) {
-        networkManager.getCountries(countries: { countries in
-            guard let countries = countries else { return }
+        networkManager.getCountries(completion: { countries in
+            guard let countries = try? countries.get() else { return }
             self.countries = countries
             self.filteredCountries = countries
             self.tableView.reloadData()
