@@ -62,26 +62,14 @@ class CountriesTests: XCTestCase {
         XCTAssertEqual(numberOfRowsResult, filteredCountriesCount)
     }
     
-    func testTableViewCellNotNil() {
-        let cell = listVC.tableView(listVC.tableView, cellForRowAt: indexPath)
+    func testTableViewCellNotNil() throws {
+        let cell = try XCTUnwrap(listVC.tableView(listVC.tableView, cellForRowAt: indexPath) as? CountryTableViewCell)
         XCTAssertNotNil(cell)
     }
     
-    func testTableViewHeaderNotNill() {
-        let header = listVC.tableView(listVC.tableView, viewForHeaderInSection: 0)
+    func testTableViewHeaderNotNill() throws {
+        let header = try XCTUnwrap(listVC.tableView(listVC.tableView, viewForHeaderInSection: 0) as? CountryTableViewHeader)
         XCTAssertNotNil(header)
-    }
-
-    func testCurrentTypeOfCell() {
-        let cell = listVC.tableView(listVC.tableView, cellForRowAt: indexPath)
-        let isCurrentType = cell is CountryTableViewCell
-        XCTAssertTrue(isCurrentType)
-    }
-    
-    func testCurrentTypeOfHeader() {
-        let header = listVC.tableView(listVC.tableView, viewForHeaderInSection: 0)
-        let isCurrentType = header is CountryTableViewHeader
-        XCTAssertTrue(isCurrentType)
     }
 }
 

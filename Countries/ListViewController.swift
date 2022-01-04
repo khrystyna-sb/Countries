@@ -92,7 +92,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         searchController.searchBar.tintColor = .black
     }
 
-    func registerTableView() {
+    private func registerTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier)
