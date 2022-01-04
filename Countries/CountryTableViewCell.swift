@@ -152,3 +152,4 @@ class CountryTableViewCell: UITableViewCell {
         flagImageView.image = nil
     }
 }
+

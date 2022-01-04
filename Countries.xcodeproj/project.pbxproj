@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0239A2F2277B1F6600B904C2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0239A2F1277B1F6600B904C2 /* NetworkManager.swift */; };
+		0239A2F827848C7800B904C2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0239A2F6278481D200B904C2 /* MockNetworkManager.swift */; };
+		0239A2FB27848E1D00B904C2 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0239A2F927848CB700B904C2 /* NetworkManagerProtocol.swift */; };
 		02B0919827551D1300E9CF1A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B0919727551D1300E9CF1A /* API.swift */; };
 		02B0919E27590C7D00E9CF1A /* CountryTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B0919D27590C7D00E9CF1A /* CountryTableViewHeader.swift */; };
 		02B091AF27620B8800E9CF1A /* PublicConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B091AE27620B8800E9CF1A /* PublicConstants.swift */; };
@@ -43,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0239A2F1277B1F6600B904C2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0239A2F6278481D200B904C2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
+		0239A2F927848CB700B904C2 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		02B0919727551D1300E9CF1A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		02B0919D27590C7D00E9CF1A /* CountryTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewHeader.swift; sourceTree = "<group>"; };
 		02B091AE27620B8800E9CF1A /* PublicConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicConstants.swift; sourceTree = "<group>"; };
@@ -108,23 +114,6 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
-		02B091B32762100200E9CF1A /* FirstScreen */ = {
-			isa = PBXGroup;
-			children = (
-				02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */,
-				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
-			);
-			path = FirstScreen;
-			sourceTree = "<group>";
-		};
-		02B091B6276245C600E9CF1A /* SecondScreen */ = {
-			isa = PBXGroup;
-			children = (
-				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
-			);
-			path = SecondScreen;
-			sourceTree = "<group>";
-		};
 		02FF1CAA2747BE0A009397BF = {
 			isa = PBXGroup;
 			children = (
@@ -152,9 +141,12 @@
 				02FF1D38274EECA8009397BF /* Apollo.swift */,
 				02B091B227620ED800E9CF1A /* Headers */,
 				02B091B027620EA200E9CF1A /* Delegates */,
-				02B091B32762100200E9CF1A /* FirstScreen */,
-				02B091B6276245C600E9CF1A /* SecondScreen */,
 				02B091AE27620B8800E9CF1A /* PublicConstants.swift */,
+				02FF1D3A2750EFE3009397BF /* CountryTableViewCell.swift */,
+				02FF1CBA2747BE0A009397BF /* DetailsViewController.swift */,
+				02FF1D26274CFF7D009397BF /* ListViewController.swift */,
+				0239A2F1277B1F6600B904C2 /* NetworkManager.swift */,
+				0239A2F927848CB700B904C2 /* NetworkManagerProtocol.swift */,
 				02FF1CBF2747BE0C009397BF /* Assets.xcassets */,
 				02FF1CC12747BE0C009397BF /* LaunchScreen.storyboard */,
 				02FF1CC42747BE0C009397BF /* Info.plist */,
@@ -165,6 +157,7 @@
 		02FF1CCC2747BE0C009397BF /* CountriesTests */ = {
 			isa = PBXGroup;
 			children = (
+				0239A2F6278481D200B904C2 /* MockNetworkManager.swift */,
 				02FF1CCD2747BE0C009397BF /* CountriesTests.swift */,
 			);
 			path = CountriesTests;
@@ -341,11 +334,13 @@
 				02B091AF27620B8800E9CF1A /* PublicConstants.swift in Sources */,
 				02FF1CBB2747BE0A009397BF /* DetailsViewController.swift in Sources */,
 				02FF1CB72747BE0A009397BF /* AppDelegate.swift in Sources */,
+				0239A2F2277B1F6600B904C2 /* NetworkManager.swift in Sources */,
 				02B091B527621FE800E9CF1A /* DetailsVCHeader.swift in Sources */,
 				02FF1D27274CFF7D009397BF /* ListViewController.swift in Sources */,
 				02FF1CB92747BE0A009397BF /* SceneDelegate.swift in Sources */,
 				02FF1D39274EECA8009397BF /* Apollo.swift in Sources */,
 				02FF1D3B2750EFE3009397BF /* CountryTableViewCell.swift in Sources */,
+				0239A2FB27848E1D00B904C2 /* NetworkManagerProtocol.swift in Sources */,
 				02B0919827551D1300E9CF1A /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0239A2F827848C7800B904C2 /* MockNetworkManager.swift in Sources */,
 				02FF1CCE2747BE0C009397BF /* CountriesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
