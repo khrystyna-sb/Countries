@@ -12,9 +12,10 @@ class CountriesTests: XCTestCase {
     
     var listVC: ListViewController!
     let indexPath = IndexPath(row: 0, section: 0)
+    let networkManager = MockNetworkManager()
     
     override func setUp() {
-        listVC = ListViewController(networkManager: MockNetworkManager())
+        listVC = ListViewController(networkManager: networkManager as! NetworkManagerProtocol)
         listVC.loadViewIfNeeded()
     }
     

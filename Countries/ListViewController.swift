@@ -37,7 +37,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
     
     var countries = [CountriesApiQuery.Data.Country]()
     var filteredCountries: [CountriesApiQuery.Data.Country] = []
-    var networkManager: NetworkManagerProtocol 
+    var networkManager: NetworkManagerProtocol
     let tableRefreshControl = UIRefreshControl()
 
     let searchController: UISearchController = {

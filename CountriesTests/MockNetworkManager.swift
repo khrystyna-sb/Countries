@@ -5,6 +5,7 @@
 //  Created by Khrystyna Matasova on 04.01.2022.
 //
 
+import Apollo
 import Foundation
 
 class MockNetworkManager: NetworkManagerProtocol {

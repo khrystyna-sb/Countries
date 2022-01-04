@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol NetworkManagerProtocol {
-    func getCountries(completion: @escaping (Result<[CountriesApiQuery.Data.Country]?, Error>) -> Void)
-}
-
 class NetworkManager: NetworkManagerProtocol {
     
     func getCountries(completion: @escaping (Result<[CountriesApiQuery.Data.Country]?, Error>) -> Void)  {
