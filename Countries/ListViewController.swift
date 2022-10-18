@@ -35,8 +35,9 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         static let searchBarPlaceHolder = "Find Countries"
     }
     
-    var countries: [CountriesApiQuery.Data.Country] = []
+    var countries = [CountriesApiQuery.Data.Country]()
     var filteredCountries: [CountriesApiQuery.Data.Country] = []
+    var networkManager: NetworkManagerProtocol
     let tableRefreshControl = UIRefreshControl()
 
     let searchController: UISearchController = {
@@ -48,11 +49,20 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         controller.searchBar.setShowsCancelButton(false, animated: false)
         return controller
     }()
-
+    
+    init(networkManager: NetworkManagerProtocol) {
+        self.networkManager = networkManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @objc private func refresh(sender: UIRefreshControl) {
         searchController.searchBar.text = ""
         searchController.searchBar.endEditing(true)
-        loadData(sender: sender)
+        getData(sender: sender)
     }
 
     override func viewDidLoad() {
@@ -62,7 +72,7 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
         setupRefreshController()
         setupNavigationItem()
         setUpSearchController()
-        loadData()
+        getData()
     }
     
     func setupRefreshController() {
@@ -163,24 +173,13 @@ class ListViewController: UITableViewController, UISearchBarDelegate, UISearchRe
 }
 
 extension ListViewController {
-    func loadData(sender: UIRefreshControl? = nil) {
-        let query = CountriesApiQuery()
-        guard let client = Apollo.shared.client else { return }
-        client.fetch(query: query) { result in
-            
-            switch result {
-            case .success(let graphQLResult):
-                if let countries = graphQLResult.data?.countries.compactMap({ $0 }) {
-                    self.countries = countries
-                    self.filteredCountries = countries
-                    self.tableView.reloadData()
-                }
-                
-            case .failure(let error):
-                
-                print("Error loading data \(error)")
-            }
-        }
+    func getData(sender: UIRefreshControl? = nil) {
+        networkManager.getCountries(completion: { countries in
+            guard let countries = try? countries.get() else { return }
+            self.countries = countries
+            self.filteredCountries = countries
+            self.tableView.reloadData()
+        })
         sender?.endRefreshing()
     }
 }
